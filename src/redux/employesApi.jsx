@@ -4,8 +4,8 @@ export const employesApi = createApi({
   reducerPath: "employesApi",
   tagTypes: ["employes"],
   baseQuery: fetchBaseQuery({
-    // baseUrl: 'https://backend-tsd.vercel.app/',
-    baseUrl: "http://localhost:5000/",
+    baseUrl: 'https://cafe-visits-backend.vercel.app/',
+    // baseUrl: "http://localhost:5000/",
     refetchOnMountOrArgChange: true,
     prepareHeaders: (headers, { getState }) => {
       const token = getState().auth.token;

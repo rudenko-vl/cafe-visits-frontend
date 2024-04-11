@@ -1,4 +1,4 @@
-import { Header, Footer } from "../components";
+import { Header, Footer, NewVisitForm } from "../components";
 // import { useEffect } from "react";
 // import { Outlet } from "react-router-dom";
 
@@ -11,7 +11,7 @@ const MainPage = () => {
   return (
     <>
       <Header />
-      <p>Main</p>
+      <NewVisitForm />
       <Footer />
       {/* <Header devices={data} />
       {isFetching && <Loader />}

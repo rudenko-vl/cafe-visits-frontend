@@ -77,11 +77,23 @@
 //   );
 // };
 
+// import { useSelector } from "react-redux";
+// import { getUserName } from "../../redux/auth/auth-selectors";
 import { Link } from "react-router-dom";
 import { Button } from "@mui/material";
 import { HeaderBox, Navigation } from "./Header.styled";
+import { logout } from "../../redux/auth/auth-operations";
+import { useDispatch } from "react-redux";
 
 export const Header = () => {
+  // const userName = useSelector(getUserName) || "";
+  // console.log(userName);
+
+  const dispatch = useDispatch();
+  const logOut = () => {
+    dispatch(logout());
+  };
+
   return (
     <>
       <HeaderBox>
@@ -97,13 +109,16 @@ export const Header = () => {
                 Главная
               </Button>
             </Link>
-            <Link to="/new">
+            <Link to="/admin">
               <Button sx={{ fontWeight: "700" }} variant="contained">
-                New
+                Admin
               </Button>
             </Link>
           </Navigation>
         </nav>
+        <Button variant="contained" color="success" onClick={logOut}>
+          Log Out
+        </Button>
       </HeaderBox>
     </>
   );

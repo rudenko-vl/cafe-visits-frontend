@@ -1,4 +1,4 @@
-import { Header, Footer } from "../components";
+import { Footer, Header } from "../components";
 
 const PreviewPage = () => {
   return (

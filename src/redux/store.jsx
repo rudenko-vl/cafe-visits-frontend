@@ -12,7 +12,7 @@ import {
 import storage from "redux-persist/lib/storage";
 
 import { employesApi } from "./employesApi";
-import { optionsApi } from "./optionsApi";
+import { visitsApi } from "./visitsApi";
 import authReducer from "./auth/auth-slice";
 import { filter } from "./filter/reduser";
 
@@ -26,7 +26,7 @@ const authPersistConfig = {
 const store = configureStore({
   reducer: combineReducers({
     [employesApi.reducerPath]: employesApi.reducer,
-    [optionsApi.reducerPath]: optionsApi.reducer,
+    [visitsApi.reducerPath]: visitsApi.reducer,
     auth: persistReducer(authPersistConfig, authReducer),
     filter,
   }),
@@ -37,7 +37,7 @@ const store = configureStore({
       },
     })
       .concat(employesApi.middleware)
-      .concat(optionsApi.middleware),
+      .concat(visitsApi.middleware),
   // devTools: process.env.NODE_ENV === 'development',
 });
 

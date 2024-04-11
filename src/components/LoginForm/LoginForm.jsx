@@ -6,7 +6,6 @@ import { login } from "../../redux/auth/auth-operations";
 import { useDispatch } from "react-redux";
 import { MdOutlineVisibility, MdOutlineVisibilityOff } from "react-icons/md";
 
-
 export const LogInForm = () => {
   const [visiblePass, setVisiblePass] = useState(false);
   const dispatch = useDispatch();
@@ -30,13 +29,14 @@ export const LogInForm = () => {
     height: "25px",
   };
 
-  const myHandleSubmit = async ({ email, password }) => {
-    const data = await dispatch(login({ email, password }));
-    if (!data.payload) {
-      alert("Не удалось авторизоваться");
-    }
+  function myHandleSubmit({ email, password }) {
+    const data = dispatch(login({ email, password }));
+    console.log(data);
+    // if (!data.payload) {
+    //   alert("Не удалось авторизоваться");
+    // }
     reset();
-  };
+  }
   return (
     <Form autoComplete="on" onSubmit={handleSubmit(myHandleSubmit)}>
       <Label>

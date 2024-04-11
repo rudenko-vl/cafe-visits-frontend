@@ -1,8 +1,8 @@
 import axios from "axios";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 
-// axios.defaults.baseURL = "https://backend-tsd.vercel.app/";
-axios.defaults.baseURL = "http://localhost:5000/";
+axios.defaults.baseURL = "https://cafe-visits-backend.vercel.app/";
+// axios.defaults.baseURL = "http://localhost:5000/";
 
 const setToken = (token) => {
   axios.defaults.headers.common.Authorization = `Bearer ${token}`;
@@ -71,8 +71,8 @@ export const refreshUser = createAsyncThunk(
   }
 );
 
-export const getDevice = async (deviceId) => {
-  const response = await axios.get(`/employes/${deviceId}`);
+export const getPerson = async (personId) => {
+  const response = await axios.get(`/employes/${personId}`);
   const data = response.data;
   return data;
 };
