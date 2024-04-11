@@ -1,7 +1,7 @@
 import { useRef } from "react";
 import { useState } from "react";
 import { useNewVisitMutation, useGetVisitsQuery } from "../../redux/visitsApi";
-import { BtnBox } from "../UpdateDevice/UpdateDevice.styled";
+// import { BtnBox } from "../UpdateDevice/UpdateDevice.styled";
 import { Button } from "@mui/material";
 import { Toaster } from "react-hot-toast";
 import { notifyWarning, notifySuccess } from "../Notify/Notify";
