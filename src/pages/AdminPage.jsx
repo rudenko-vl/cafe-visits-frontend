@@ -39,6 +39,7 @@ const AdminPage = () => {
                 <li key={item._id}>
                   <p>{item._id}</p>
                   <p>{item.name}</p>
+                  <p>{item.code}</p>
                   <img
                     style={{ width: "200px", height: "200px" }}
                     src={

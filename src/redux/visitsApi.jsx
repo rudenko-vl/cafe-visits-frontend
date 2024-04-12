@@ -1,45 +1,45 @@
-import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-
+import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
 export const visitsApi = createApi({
-  reducerPath: 'visitsApi',
-  tagTypes: ['visits'],
+  reducerPath: "visitsApi",
+  tagTypes: ["visits"],
   baseQuery: fetchBaseQuery({
-    // baseUrl: 'https://cafe-visits-backend.vercel.app/',
-    baseUrl: "http://localhost:5000/",
+    baseUrl: "https://cafe-backend-mauve.vercel.app/",
+    // baseUrl: "http://localhost:5001/",
     refetchOnMountOrArgChange: true,
     prepareHeaders: (headers, { getState }) => {
       const token = getState().auth.token;
       if (token) {
-        headers.set('Authorization', `Bearer ${token}`);
+        headers.set("Authorization", `Bearer ${token}`);
       }
       return headers;
-    }
+    },
   }),
   endpoints: (build) => ({
     getVisits: build.query({
       query: () => "/visits",
-      providesTags: (result) => result
-        ? [
-          ...result.map(({ id }) => ({ type: 'visits', id })),
-          { type: 'visits', id: 'LIST' },
-        ]
-        : [{ type: 'visits', id: 'LIST' }],
+      providesTags: (result) =>
+        result
+          ? [
+              ...result.map(({ id }) => ({ type: "visits", id })),
+              { type: "visits", id: "LIST" },
+            ]
+          : [{ type: "visits", id: "LIST" }],
     }),
     newVisit: build.mutation({
       query: (body) => ({
-        url: 'visits',
-        method: 'POST',
+        url: "visits",
+        method: "POST",
         body,
       }),
-      invalidatesTags: [{ type: 'visits', id: 'LIST' }]
+      invalidatesTags: [{ type: "visits", id: "LIST" }],
     }),
     deleteVisit: build.mutation({
       query: (_id) => ({
         url: `visits${_id}`,
-        method: 'DELETE',
+        method: "DELETE",
       }),
-      invalidatesTags: [{ type: 'visits', id: 'LIST' }]
+      invalidatesTags: [{ type: "visits", id: "LIST" }],
     }),
     // updateOwner: build.mutation({
     //   query: ({ _id, ...owner }) => ({
@@ -50,7 +50,11 @@ export const visitsApi = createApi({
     //   }),
     //   invalidatesTags: [{ type: 'options', id: 'LIST' }],
     // }),
-  })
+  }),
 });
 
-export const {useGetVisitsQuery, useDeleteVisitMutation, useNewVisitMutation} = visitsApi;
+export const {
+  useGetVisitsQuery,
+  useDeleteVisitMutation,
+  useNewVisitMutation,
+} = visitsApi;

@@ -19,7 +19,6 @@ export const VisitsList = () => {
             <th>Дата</th>
             <th>Время</th>
             <th>Место</th>
-            {/* <th>Del</th> */}
 
             {/* <th>Место</th> */}
             {/* <th>Ответственный</th> */}
@@ -33,7 +32,6 @@ export const VisitsList = () => {
                 <td>{index + 1}</td>
                 <td>{visit.name.split("/")[0]}</td>
                 <td>{visit.createdAt.split("T")[0]}</td>
-                {/* <td>{visit.createdAt.split("T")[1]}</td> */}
                 <td>{visit.time}</td>
                 <td>{visit.user.name}</td>
                 {/* <td>
