@@ -80,19 +80,6 @@ export const NewVisitForm = () => {
     }
   }, 500);
 
-  // const handlerInputChange = (e) => {
-  //   if (e.target.value !== "") {
-  //     getPerson(e.target.value).then((data) => {
-  //       if (!data) {
-  //         return null;
-  //       } else {
-  //         setSearchedPerson(data);
-  //         setInputValue(data.name);
-  //       }
-  //     });
-  //   }
-  // };
-
   const handleKeyPress = (e) => {
     if (e.keyCode === 13) {
       e.preventDefault();
