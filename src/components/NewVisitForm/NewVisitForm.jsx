@@ -1,5 +1,5 @@
+import { useState, useEffect } from "react";
 import { useRef } from "react";
-import { useState } from "react";
 import { useNewVisitMutation, useGetVisitsQuery } from "../../redux/visitsApi";
 // import { BtnBox } from "../UpdateDevice/UpdateDevice.styled";
 import { Button } from "@mui/material";
@@ -7,10 +7,17 @@ import { Toaster } from "react-hot-toast";
 import { notifyWarning, notifySuccess } from "../Notify/Notify";
 import { Wrapper, Input } from "../CreateOwner/CreateOwner.styled";
 import { getPerson } from "../../redux/auth/auth-operations";
+import { debounce } from "lodash";
 // import { Loader } from "../Loader/Loader";
 
 export const NewVisitForm = () => {
   const inputRef = useRef();
+  const searchInputRef = useRef();
+
+  useEffect(() => {
+    searchInputRef.current.focus();
+  }, []);
+
   const [inputValue, setInputValue] = useState("");
   const [searchedPerson, setSearchedPerson] = useState({});
   // const [addVisit, object] = useNewVisitMutation();
@@ -26,6 +33,12 @@ export const NewVisitForm = () => {
   const day = currentDate.getDate();
   const today = day + "." + "0" + month + "." + year;
 
+  const hours = currentDate.getHours();
+  const minutes = currentDate.getMinutes();
+  const seconds = currentDate.getSeconds();
+
+  const time = `${hours}:${minutes}:${seconds}`;
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     const name = searchedPerson.name;
@@ -33,15 +46,19 @@ export const NewVisitForm = () => {
 
     if (newVisit === "" || name === undefined) {
       setSearchedPerson({});
-      location.reload();
+      setTimeout(() => {
+        location.reload();
+      }, 2000);
       return notifyWarning("Сотрудник не найден");
     } else if (list.includes(newVisit.trim().toLowerCase())) {
       setInputValue("");
       setSearchedPerson({});
-      location.reload();
+      setTimeout(() => {
+        location.reload();
+      }, 2000);
       return notifyWarning("Сегодня уже зарегистрирован");
     } else {
-      await addVisit({ name: newVisit });
+      await addVisit({ name: newVisit, time });
       setTimeout(() => {
         notifySuccess("Успешно создано");
       }, 500);
@@ -50,7 +67,7 @@ export const NewVisitForm = () => {
     }
   };
 
-  const handlerInputChange = (e) => {
+  const handlerInputChange = debounce((e) => {
     if (e.target.value !== "") {
       getPerson(e.target.value).then((data) => {
         if (!data) {
@@ -61,13 +78,27 @@ export const NewVisitForm = () => {
         }
       });
     }
-  };
+  }, 500);
+
+  // const handlerInputChange = (e) => {
+  //   if (e.target.value !== "") {
+  //     getPerson(e.target.value).then((data) => {
+  //       if (!data) {
+  //         return null;
+  //       } else {
+  //         setSearchedPerson(data);
+  //         setInputValue(data.name);
+  //       }
+  //     });
+  //   }
+  // };
 
   const handleKeyPress = (e) => {
-    if (e.key === "Enter") {
+    if (e.keyCode === 13) {
       e.preventDefault();
       inputRef.current.blur();
-      handleSubmit(e);
+      // handleSubmit(e);
+      console.log("press Enter");
     }
   };
 
@@ -79,6 +110,7 @@ export const NewVisitForm = () => {
         style={{ width: "350px" }}
         type="text"
         onChange={handlerInputChange}
+        ref={searchInputRef}
       />
       <form onSubmit={handleSubmit}>
         <Input
@@ -88,13 +120,12 @@ export const NewVisitForm = () => {
           value={inputValue}
           disabled={true}
           ref={inputRef}
-          keydown={handleKeyPress}
+          onKeyDown={handleKeyPress}
         />
         <Button variant="contained" color="success" type="submit">
           Create
         </Button>
       </form>
-
       {searchedPerson?.name && (
         <div>
           <img

@@ -77,17 +77,18 @@
 //   );
 // };
 
-// import { useSelector } from "react-redux";
-// import { getUserName } from "../../redux/auth/auth-selectors";
+import { useSelector } from "react-redux";
+import { getIsLoggedIn, getUserAdmin } from "../../redux/auth/auth-selectors";
 import { Link } from "react-router-dom";
 import { Button } from "@mui/material";
 import { HeaderBox, Navigation } from "./Header.styled";
 import { logout } from "../../redux/auth/auth-operations";
 import { useDispatch } from "react-redux";
+// import { UserMenu } from "../UserMenu/UserMenu";
 
 export const Header = () => {
-  // const userName = useSelector(getUserName) || "";
-  // console.log(userName);
+  const isLogged = useSelector(getIsLoggedIn);
+  const isAdmin = useSelector(getUserAdmin);
 
   const dispatch = useDispatch();
   const logOut = () => {
@@ -97,28 +98,36 @@ export const Header = () => {
   return (
     <>
       <HeaderBox>
-        <nav>
-          <Navigation>
+        <Navigation>
+          <Link to="/employes">
+            <Button sx={{ fontWeight: "700" }} variant="contained">
+              Главная
+            </Button>
+          </Link>
+          <Link style={{ color: "red", fontSize: "28px" }} to="/history">
+            <Button sx={{ fontWeight: "700" }} variant="contained">
+              History
+            </Button>
+          </Link>
+          {!isLogged ? (
             <Link to="/auth/login">
               <Button variant="contained" sx={{ fontWeight: "700" }}>
                 Войти
               </Button>
             </Link>
-            <Link to="/employes">
-              <Button sx={{ fontWeight: "700" }} variant="contained">
-                Главная
-              </Button>
-            </Link>
-            <Link to="/admin">
-              <Button sx={{ fontWeight: "700" }} variant="contained">
-                Admin
-              </Button>
-            </Link>
-          </Navigation>
-        </nav>
-        <Button variant="contained" color="success" onClick={logOut}>
-          Log Out
-        </Button>
+          ) : (
+            <Button variant="contained" color="success" onClick={logOut}>
+              Log Out
+            </Button>
+          )}
+        </Navigation>
+        {isAdmin && (
+          <Link to="/admin">
+            <Button sx={{ fontWeight: "700" }} variant="contained">
+              Admin
+            </Button>
+          </Link>
+        )}
       </HeaderBox>
     </>
   );

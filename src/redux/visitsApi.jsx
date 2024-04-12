@@ -5,8 +5,8 @@ export const visitsApi = createApi({
   reducerPath: 'visitsApi',
   tagTypes: ['visits'],
   baseQuery: fetchBaseQuery({
-    baseUrl: 'https://cafe-visits-backend.vercel.app/',
-    // baseUrl: "http://localhost:5000/",
+    // baseUrl: 'https://cafe-visits-backend.vercel.app/',
+    baseUrl: "http://localhost:5000/",
     refetchOnMountOrArgChange: true,
     prepareHeaders: (headers, { getState }) => {
       const token = getState().auth.token;

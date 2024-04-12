@@ -41,7 +41,11 @@ const AdminPage = () => {
                   <p>{item.name}</p>
                   <img
                     style={{ width: "200px", height: "200px" }}
-                    src={item.imgUrl ? item.imgUrl : "/public/avatar.jpg"}
+                    src={
+                      item.imgUrl.includes("http")
+                        ? item.imgUrl
+                        : "/public/avatar.jpg"
+                    }
                     alt="img"
                   />
                   <span
