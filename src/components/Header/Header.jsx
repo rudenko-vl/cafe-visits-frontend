@@ -99,16 +99,20 @@ export const Header = () => {
     <>
       <HeaderBox>
         <Navigation>
-          <Link to="/employes">
-            <Button sx={{ fontWeight: "700" }} variant="contained">
-              Главная
-            </Button>
-          </Link>
-          <Link style={{ color: "red", fontSize: "28px" }} to="/history">
-            <Button sx={{ fontWeight: "700" }} variant="contained">
-              History
-            </Button>
-          </Link>
+          {isLogged && (
+            <div>
+              <Link to="/employes">
+                <Button sx={{ fontWeight: "700" }} variant="contained">
+                  Главная
+                </Button>
+              </Link>
+              <Link style={{ color: "red", fontSize: "28px" }} to="/history">
+                <Button sx={{ fontWeight: "700" }} variant="contained">
+                  History
+                </Button>
+              </Link>
+            </div>
+          )}
           {!isLogged ? (
             <Link to="/auth/login">
               <Button variant="contained" sx={{ fontWeight: "700" }}>

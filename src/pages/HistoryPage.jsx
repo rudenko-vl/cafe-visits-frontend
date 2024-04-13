@@ -4,7 +4,6 @@ const HistoryPage = () => {
   return (
     <>
       <Header />
-      <p>HistoryPage</p>
       <VisitsList />
       <Footer />
     </>

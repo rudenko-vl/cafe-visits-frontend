@@ -1,12 +1,11 @@
-// import { NewUserForm, Header, Footer } from "../components";
-import { NewUserForm } from "../components";
+import { NewUserForm, Header, Footer } from "../components";
 
  const RegPage = () => {
   return (
     <>
-      {/* <Header /> */}
+      <Header />
       <NewUserForm />
-      {/* <Footer/> */}
+      <Footer/>
     </>
   );
 };

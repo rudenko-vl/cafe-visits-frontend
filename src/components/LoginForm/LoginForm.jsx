@@ -30,8 +30,8 @@ export const LogInForm = () => {
   };
 
   function myHandleSubmit({ email, password }) {
-    const data = dispatch(login({ email, password }));
-    console.log(data);
+    dispatch(login({ email, password }));
+    // console.log(data);
     // if (!data.payload) {
     //   alert("Не удалось авторизоваться");
     // }

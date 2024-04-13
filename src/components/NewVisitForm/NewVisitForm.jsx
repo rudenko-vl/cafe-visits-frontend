@@ -62,6 +62,9 @@ export const NewVisitForm = () => {
       setTimeout(() => {
         notifySuccess("Успешно создано");
       }, 500);
+      setTimeout(() => {
+        location.reload();
+      }, 2000);
       setInputValue("");
       setSearchedPerson({});
     }
@@ -117,7 +120,11 @@ export const NewVisitForm = () => {
         <div>
           <img
             style={{ width: "350px", height: "350px", marginTop: "30px" }}
-            src={searchedPerson.imgUrl}
+            src={
+              searchedPerson.imgUrl.includes("http")
+                ? searchedPerson.imgUrl
+                : "/avatar.jpg"
+            }
             alt="img"
           />
         </div>
