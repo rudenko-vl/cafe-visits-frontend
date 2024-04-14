@@ -78,8 +78,13 @@ export const LogInForm = () => {
       <div style={{ height: 40 }}>
         {errors?.password && <p>{errors?.password?.message || "Error!"}</p>}
       </div>
-      <Button type="submit" variant="contained" color="success">
-        Войти
+      <Button
+        type="submit"
+        variant="contained"
+        sx={{ fontWeight: "700" }}
+        color="success"
+      >
+        Вход
       </Button>
       <Text>
         Нет аккаунта? <RegNav to="/auth/register">Зарегистрируйтесь!</RegNav>

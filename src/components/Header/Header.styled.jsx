@@ -1,4 +1,5 @@
 import styled from "@emotion/styled";
+import { Button } from "@mui/material";
 
 export const HeaderBox = styled.header`
   top: 0;
@@ -26,4 +27,16 @@ export const NavItem = styled.li`
   :not(last-child) {
     margin-right: 15px;
   }
+`;
+
+export const BtnBox = styled.ul`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  list-style: none;
+  margin-top: 30px;
+`;
+
+export const HeaderBtn = styled(Button)`
+  font-weight: 700;
 `;

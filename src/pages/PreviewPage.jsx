@@ -1,13 +1,12 @@
 import { Footer, Header } from "../components";
+import { PreviewTitle } from "../components/LoginForm/LoginForm.styled";
 
 const PreviewPage = () => {
   return (
     <>
       <Header />
       <div className="preview">
-        <h1 style={{ color: "yellow", marginLeft: "30px" }}>
-          Войдите или зарегистрируйтесь!
-        </h1>
+        <PreviewTitle>Войдите или зарегистрируйтесь!</PreviewTitle>
       </div>
       <Footer />
     </>

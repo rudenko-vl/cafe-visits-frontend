@@ -4,4 +4,4 @@ export * from "./RegPage";
 export * from "./LoginPage";
 export * from "./PreviewPage";
 export * from "./HistoryPage";
-export * from "./NewDevicePage";
+export * from "./NewEmployeePage";

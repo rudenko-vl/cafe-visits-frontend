@@ -17,19 +17,8 @@ import RegPage from "./pages/RegPage";
 import LoginPage from "./pages/LoginPage";
 import ErrorPage from "./pages/ErrorPage";
 import HistoryPage from "./pages/HistoryPage";
-import NewDevicePage from "./pages/NewDevicePage";
+import NewEmployeePage from "./pages/NewEmployeePage";
 import AdminPage from "./pages/AdminPage";
-
-// import { createAsyncView } from "./helpers/createAsyncView";
-
-// const MainPage = createAsyncView("MainPage");
-// const PreviewPage = createAsyncView("PreviewPage");
-// const RegPage = createAsyncView("RegPage");
-// const ErrorPage = createAsyncView("ErrorPage");
-// const LoginPage = createAsyncView("LoginPage");
-// const NewDevicePage = createAsyncView("NewDevicePage");
-// const DevicePage = createAsyncView("DevicePage");
-// const SettingsPage = createAsyncView("SettingsPage");
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -65,7 +54,7 @@ const router = createBrowserRouter(
         path="/new"
         element={
           <PrivateRoute restricted>
-            <NewDevicePage />
+            <NewEmployeePage />
           </PrivateRoute>
         }
         errorElement={<ErrorPage />}

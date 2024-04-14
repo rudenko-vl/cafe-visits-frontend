@@ -1,6 +1,6 @@
 import { Header, NewEmployeeForm, Footer } from "../components";
 
- const NewDevicePage = () => {
+ const NewEmployeePage = () => {
 return (
     <>
     <Header/>
@@ -9,4 +9,4 @@ return (
     </>
 )
 };
-export default NewDevicePage;
+export default NewEmployeePage;

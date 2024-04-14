@@ -95,8 +95,13 @@ export const NewUserForm = () => {
       <div style={{ height: 30 }}>
         {errors?.name && <p>{errors?.name?.message || "Error!"}</p>}
       </div>
-      <Button type="submit" variant="contained" color="success">
-        Register
+      <Button
+        type="submit"
+        variant="contained"
+        sx={{ fontWeight: "700" }}
+        color="success"
+      >
+        Создать аккаунт
       </Button>
     </Form>
   );

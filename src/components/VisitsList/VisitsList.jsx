@@ -1,16 +1,43 @@
 import { Container } from "./VisitsList.styled";
-import { useGetVisitsQuery } from "../../redux/visitsApi";
+import { SubTitle, TopWrap } from "./VisitsList.styled";
+import {
+  useGetVisitsQuery,
+  useDeleteVisitMutation,
+} from "../../redux/visitsApi";
+import { Filter } from "../../components";
+import { getFilter } from "../../redux/filter/selectors";
+import { useSelector } from "react-redux";
 
 export const VisitsList = () => {
   const { data: visitsList } = useGetVisitsQuery();
-  // const [removeVisit] = useDeleteVisitMutation();
+  const [removeVisit] = useDeleteVisitMutation();
 
-  // const handleDeleteVisit = async (id) => {
-  //   await removeVisit(id).unwrap();
-  // };
+  const value = useSelector(getFilter);
+  const filteredVisits =
+    visitsList?.length > 0
+      ? visitsList.filter((visit) =>
+          (
+            visit.name.split("/")[0] +
+            visit.createdAt.split("T")[0] +
+            visit.user.name
+          )
+            .toLowerCase()
+            .includes(value.trim().toLowerCase())
+        )
+      : [];
+
+  const handleDeleteVisit = async (_id) => {
+    await removeVisit(_id).unwrap();
+  };
 
   return (
     <Container>
+      <TopWrap>
+        <SubTitle style={{ margin: "0" }}>
+          Кол-во записей - {filteredVisits?.length}
+        </SubTitle>
+        <Filter value={value} />
+      </TopWrap>
       <table>
         <thead>
           <tr>
@@ -19,32 +46,28 @@ export const VisitsList = () => {
             <th>Дата</th>
             <th>Время</th>
             <th>Место</th>
-
-            {/* <th>Место</th> */}
-            {/* <th>Ответственный</th> */}
-            {/* <th>Ссылка</th> */}
+            <th>Удалить</th>
           </tr>
         </thead>
         <tbody>
-          {visitsList &&
-            visitsList.map((visit, index) => (
+          {filteredVisits &&
+            filteredVisits.map((visit, index) => (
               <tr key={visit._id}>
                 <td>{index + 1}</td>
                 <td>{visit.name.split("/")[0]}</td>
                 <td>{visit.createdAt.split("T")[0]}</td>
                 <td>{visit.time}</td>
                 <td>{visit.user.name}</td>
-                {/* <td>
-                  <span
+                <td>
+                  <button
+                    disabled={true}
                     onClick={() => {
                       handleDeleteVisit(visit._id);
                     }}
                   >
                     Delete
-                  </span>
-                </td> */}
-                {/* <td>{device.place}</td> */}
-                {/* <td>{device.owner}</td> */}
+                  </button>
+                </td>
               </tr>
             ))}
         </tbody>

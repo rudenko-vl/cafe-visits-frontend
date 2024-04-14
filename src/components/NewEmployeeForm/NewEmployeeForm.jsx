@@ -5,14 +5,13 @@ import { Link, useLocation } from "react-router-dom";
 import { useState } from "react";
 import { notifyWarning, notifySuccess } from "../Notify/Notify";
 import { Toaster } from "react-hot-toast";
-// import { Loader } from "../Loader/Loader";
+import { Loader } from "../Loader/Loader";
 import { useGetEmployesQuery } from "../../redux/employesApi";
 
 export const NewEmployeeForm = () => {
   const [newPerson, isError] = useNewEmployeeMutation();
   const location = useLocation();
   const query = isError.isLoading;
-  console.log(query);
   const [formData, setFormData] = useState({
     name: "",
     imgUrl: "",
@@ -55,7 +54,7 @@ export const NewEmployeeForm = () => {
       <Link to={location?.state ?? "/admin"}>
         <Button variant="contained">Назад</Button>
       </Link>
-      <Title>Создать новую запись</Title>
+      <Title>Добавить сотрудника</Title>
       <Form onSubmit={handlerSubmit} style={{ position: "relative" }}>
         <TextField
           sx={{ marginBottom: "15px" }}
@@ -78,17 +77,12 @@ export const NewEmployeeForm = () => {
         />
 
         <Button
-          // disabled={
-          //   formData.position.length < 3 || formData.sn.length < 3
-          //     ? true
-          //     : false
-          // }
+          disabled={formData.name.length < 3 ? true : false}
           type="submit"
           variant="contained"
           color="success"
         >
-          Создать
-          {/* {query ? <Loader size={20} /> : "Создать"} */}
+          {query ? <Loader size={20} /> : "Создать"}
         </Button>
       </Form>
     </Wrapper>

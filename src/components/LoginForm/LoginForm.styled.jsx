@@ -43,3 +43,13 @@ export const RegNav = styled(Link)`
   text-decoration: underline;
   font-weight: 700;
 `;
+
+export const PreviewTitle = styled.h1`
+  background: #000000a6;
+  color: white;
+  font-size: 36px;
+  text-align: center;
+  width: 600px;
+  margin: 0 auto;
+  padding: 10px;
+`;

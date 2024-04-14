@@ -28,3 +28,15 @@ export const Item = styled.li`
   background-color: #f8f7f7;
   box-shadow: 0 4px 10px black;
 `;
+
+export const TopWrap = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 30px;
+  margin-bottom: 20px;
+`;
+export const SubTitle = styled.h3`
+  color: white;
+`;

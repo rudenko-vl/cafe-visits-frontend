@@ -1,94 +1,25 @@
-// import { useSelector } from "react-redux";
-// import { Link, useLocation } from "react-router-dom";
-// import { Button } from "@mui/material";
-// import { getIsLoggedIn } from "../../redux/auth/auth-selectors";
-// import { HeaderBox, Navigation } from "./Header.styled";
-// import { UserMenu, Filter } from "../../components";
-// import { getFilter } from "../../redux/filter/selectors";
-
-// export const Header = () => {
-//   const logged = useSelector(getIsLoggedIn);
-//   const value = useSelector(getFilter);
-//   const location = useLocation();
-//     const filteredDevices =
-//       devices?.length > 0
-//         ? devices.filter((item) =>
-//             (
-//               item.position +
-//               item.sn +
-//               item.model +
-//               item.place +
-//               item.owner +
-//               item.uz
-//             )
-//               .toLowerCase()
-//               .includes(value.trim().toLowerCase())
-//           )
-//         : [];
-
-//   return (
-//     <>
-//       <HeaderBox>
-//         {location.pathname === "/employes" ? (
-//           <Link to="/new">
-//             <Button
-//               sx={{ width: "220px", height: "40px", fontWeight: "700" }}
-//               variant="contained"
-//             >
-//               Добавить запись
-//             </Button>
-//           </Link>
-//         ) : (
-//           <Link to="/devices">
-//             <Button sx={{ fontWeight: "700" }} variant="contained">
-//               Главная
-//             </Button>
-//           </Link>
-//         )}
-//         {logged && <Filter value={value} />}
-//         <nav>
-//           <Navigation>
-//             {logged && (
-//               <Link to="/settings">
-//                 <Button
-//                   sx={{ fontWeight: "700", marginRight: "30px" }}
-//                   variant="contained"
-//                 >
-//                   Настройки
-//                 </Button>
-//               </Link>
-//             )}
-//             {logged ? (
-//               <UserMenu />
-//             ) : (
-//               <Link to="/auth/login">
-//                 <Button variant="contained" sx={{ fontWeight: "700" }}>
-//                   Войти
-//                 </Button>
-//               </Link>
-//             )}
-//           </Navigation>
-//         </nav>
-//       </HeaderBox>
-//       {location.pathname === "/devices" ? (
-//         <DevicesList data={filteredDevices} />
-//       ) : null}
-//     </>
-//   );
-// };
-
+import { useState } from "react";
 import { useSelector } from "react-redux";
-import { getIsLoggedIn, getUserAdmin } from "../../redux/auth/auth-selectors";
+import {
+  getIsLoggedIn,
+  getUserAdmin,
+  getIsAuthorizing,
+} from "../../redux/auth/auth-selectors";
 import { Link } from "react-router-dom";
-import { Button } from "@mui/material";
-import { HeaderBox, Navigation } from "./Header.styled";
+import { HeaderBox, Navigation, BtnBox, HeaderBtn } from "./Header.styled";
 import { logout } from "../../redux/auth/auth-operations";
 import { useDispatch } from "react-redux";
-// import { UserMenu } from "../UserMenu/UserMenu";
+import { Modal } from "../Modal/Modal";
+import { Loader } from "../Loader/Loader";
 
 export const Header = () => {
   const isLogged = useSelector(getIsLoggedIn);
   const isAdmin = useSelector(getUserAdmin);
+  const auth = useSelector(getIsAuthorizing);
+
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const handleOpenModal = () => setIsModalOpen(true);
+  const handleCloseModal = () => setIsModalOpen(false);
 
   const dispatch = useDispatch();
   const logOut = () => {
@@ -102,37 +33,55 @@ export const Header = () => {
           {isLogged && (
             <div>
               <Link to="/employes">
-                <Button sx={{ fontWeight: "700" }} variant="contained">
+                <HeaderBtn sx={{ marginRight: "30px" }} variant="contained">
                   Главная
-                </Button>
+                </HeaderBtn>
               </Link>
-              <Link style={{ color: "red", fontSize: "28px" }} to="/history">
-                <Button sx={{ fontWeight: "700" }} variant="contained">
-                  History
-                </Button>
+              <Link to="/history">
+                <HeaderBtn variant="contained">История</HeaderBtn>
               </Link>
             </div>
           )}
           {!isLogged ? (
             <Link to="/auth/login">
-              <Button variant="contained" sx={{ fontWeight: "700" }}>
-                Войти
-              </Button>
+              <HeaderBtn color="success" variant="contained">
+                Вход
+              </HeaderBtn>
             </Link>
           ) : (
-            <Button variant="contained" color="success" onClick={logOut}>
-              Log Out
-            </Button>
+            <HeaderBtn
+              variant="contained"
+              color="success"
+              onClick={handleOpenModal}
+            >
+              Выйти
+            </HeaderBtn>
           )}
         </Navigation>
         {isAdmin && (
           <Link to="/admin">
-            <Button sx={{ fontWeight: "700" }} variant="contained">
+            <HeaderBtn sx={{ marginLeft: "30px" }} variant="contained">
               Admin
-            </Button>
+            </HeaderBtn>
           </Link>
         )}
       </HeaderBox>
+      <Modal isOpen={isModalOpen} onClose={handleCloseModal}>
+        <h1>Хотите выйти?</h1>
+        <BtnBox>
+          <HeaderBtn variant="contained" color="success" onClick={logOut}>
+            {auth === "loading" ? <Loader size={20} /> : "Да"}
+          </HeaderBtn>
+          <HeaderBtn
+            sx={{ marginLeft: "15px" }}
+            variant="contained"
+            color="error"
+            onClick={handleCloseModal}
+          >
+            Нет
+          </HeaderBtn>
+        </BtnBox>
+      </Modal>
     </>
   );
 };
