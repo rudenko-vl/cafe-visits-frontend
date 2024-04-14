@@ -1,7 +1,7 @@
 import axios from "axios";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 
-axios.defaults.baseURL = "https://cafe-backend-mauve.vercel.app/";
+axios.defaults.baseURL = "https://cafe-backend-alpha.vercel.app/";
 // axios.defaults.baseURL = "http://localhost:5001/";
 
 const setToken = (token) => {
