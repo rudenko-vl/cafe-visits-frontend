@@ -1,16 +1,19 @@
 import { useState, useEffect } from "react";
 import { useRef } from "react";
 import { useNewVisitMutation, useGetVisitsQuery } from "../../redux/visitsApi";
+import { useGetEmployesQuery } from "../../redux/employesApi";
 import { Toaster } from "react-hot-toast";
+import { AiOutlineClear } from "react-icons/ai";
 import { notifyWarning, notifySuccess } from "../Notify/Notify";
 import {
   Wrapper,
   Input,
-  Form,
   ButtonSubmit,
   SearchInput,
+  FormWrapper,
+  Image,
+  ClearBtn,
 } from "./NewVisitForm.styled";
-import { getPerson } from "../../redux/auth/auth-operations";
 import { debounce } from "lodash";
 import { Loader } from "../Loader/Loader";
 
@@ -26,7 +29,16 @@ export const NewVisitForm = () => {
 
   const [addVisit, object] = useNewVisitMutation();
   const { data } = useGetVisitsQuery();
-  const list = data?.map((obj) => obj.name.toLowerCase());
+  const workers = useGetEmployesQuery();
+  const workersList = workers?.data;
+
+  function findPersonByCode(code) {
+    return workersList?.find((user) => {
+      return user.code === code;
+    });
+  }
+
+  const listNames = data?.map((obj) => obj.name.toLowerCase());
   const loading = object.isLoading;
 
   const currentDate = new Date();
@@ -52,7 +64,7 @@ export const NewVisitForm = () => {
         location.reload();
       }, 2000);
       return notifyWarning("Сотрудник не найден");
-    } else if (list.includes(newVisit.trim().toLowerCase())) {
+    } else if (listNames.includes(newVisit.trim().toLowerCase())) {
       setInputValue("");
       setSearchedPerson({});
       setTimeout(() => {
@@ -72,14 +84,13 @@ export const NewVisitForm = () => {
   const handlerInputChange = debounce((e) => {
     setSearchedPerson(searchedPerson);
     if (e.target.value !== "") {
-      getPerson(e.target.value).then((data) => {
-        if (!data) {
-          return null;
-        } else {
-          setSearchedPerson(data);
-          setInputValue(data.name);
-        }
-      });
+      const finded = findPersonByCode(e.target.value);
+      if (!finded) {
+        return null;
+      } else {
+        setSearchedPerson(finded);
+        setInputValue(finded.name);
+      }
     }
   }, 500);
 
@@ -89,26 +100,32 @@ export const NewVisitForm = () => {
     return (
       <Wrapper>
         <Toaster />
-        <h1 style={{ color: "white" }}>Добавить запись</h1>
-        <SearchInput
-          type="text"
-          onChange={handlerInputChange}
-          ref={searchInputRef}
-        />
-        <Form onSubmit={handleSubmit}>
-          <Input
+        <h2 style={{ color: "white" }}>Добавить запись</h2>
+        <FormWrapper>
+          <SearchInput
             type="text"
-            readOnly
-            value={inputValue}
-            disabled={true}
-            ref={inputRef}
+            placeholder="Поиск"
+            onChange={handlerInputChange}
+            ref={searchInputRef}
           />
-          <ButtonSubmit type="submit">Записать</ButtonSubmit>
-        </Form>
+          <ClearBtn onClick={() => location.reload()}>
+            <AiOutlineClear />
+          </ClearBtn>
+          <form onSubmit={handleSubmit}>
+            <Input
+              type="text"
+              readOnly
+              value={inputValue}
+              disabled={true}
+              ref={inputRef}
+            />
+            <ButtonSubmit type="submit">Записать</ButtonSubmit>
+          </form>
+        </FormWrapper>
+
         {searchedPerson?.name && (
           <div>
-            <img
-              style={{ width: "300px", height: "300px", marginTop: "30px" }}
+            <Image
               src={
                 searchedPerson.imgUrl.includes("http")
                   ? searchedPerson.imgUrl

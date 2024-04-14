@@ -6,11 +6,13 @@ import {
 } from "../../redux/visitsApi";
 import { Filter } from "../../components";
 import { getFilter } from "../../redux/filter/selectors";
+import { getUserAdmin } from "../../redux/auth/auth-selectors";
 import { useSelector } from "react-redux";
 
 export const VisitsList = () => {
   const { data: visitsList } = useGetVisitsQuery();
   const [removeVisit] = useDeleteVisitMutation();
+  const isAdmin = useSelector(getUserAdmin);
 
   const value = useSelector(getFilter);
   const filteredVisits =
@@ -46,7 +48,7 @@ export const VisitsList = () => {
             <th>Дата</th>
             <th>Время</th>
             <th>Место</th>
-            <th>Удалить</th>
+            {isAdmin && <th>Удалить</th>}
           </tr>
         </thead>
         <tbody>
@@ -58,16 +60,18 @@ export const VisitsList = () => {
                 <td>{visit.createdAt.split("T")[0]}</td>
                 <td>{visit.time}</td>
                 <td>{visit.user.name}</td>
-                <td>
-                  <button
-                    disabled={true}
-                    onClick={() => {
-                      handleDeleteVisit(visit._id);
-                    }}
-                  >
-                    Delete
-                  </button>
-                </td>
+                {isAdmin && (
+                  <td>
+                    <button
+                      disabled={true}
+                      onClick={() => {
+                        handleDeleteVisit(visit._id);
+                      }}
+                    >
+                      Delete
+                    </button>
+                  </td>
+                )}
               </tr>
             ))}
         </tbody>

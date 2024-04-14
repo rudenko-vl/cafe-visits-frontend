@@ -29,7 +29,7 @@ export const Workers = () => {
   const filteredPersons =
     allPersons?.length > 0
       ? allPersons.filter((item) =>
-          (item._id + item.name)
+          (item.code + item.name)
             .toLowerCase()
             .includes(value.trim().toLowerCase())
         )
@@ -62,7 +62,7 @@ export const Workers = () => {
               <thead>
                 <tr>
                   <th>№</th>
-                  <th>Id</th>
+                  <th>Код</th>
                   <th>Имя</th>
                   <th>Удалить</th>
                   <th>Обновить</th>
@@ -73,7 +73,7 @@ export const Workers = () => {
                   filteredPersons.map((person, index) => (
                     <tr key={person._id}>
                       <td>{index + 1}</td>
-                      <td>{person._id}</td>
+                      <td>{person.code}</td>
                       <td>{person.name}</td>
                       <td>
                         <DelBtn onClick={() => handleDeletePerson(person._id)}>
