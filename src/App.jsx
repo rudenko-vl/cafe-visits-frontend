@@ -61,19 +61,19 @@ const router = createBrowserRouter(
         errorElement={<ErrorPage />}
       ></Route>
       <Route
-        path="/update"
+        path="/main"
         element={
           <PrivateRoute restricted>
-            <UpdatePage />
+            <MainPage />
           </PrivateRoute>
         }
         errorElement={<ErrorPage />}
       ></Route>
       <Route
-        path="/admin"
+        path="/history"
         element={
           <PrivateRoute restricted>
-            <AdminPage />
+            <HistoryPage />
           </PrivateRoute>
         }
         errorElement={<ErrorPage />}
@@ -83,16 +83,16 @@ const router = createBrowserRouter(
           path="/employes"
           element={
             <PrivateRoute restricted>
-              <MainPage />
+              <AdminPage />
             </PrivateRoute>
           }
           errorElement={<ErrorPage />}
         />
         <Route
-          path="/history"
+          path="/employes/:_id"
           element={
             <PrivateRoute restricted>
-              <HistoryPage />
+              <UpdatePage />
             </PrivateRoute>
           }
           errorElement={<ErrorPage />}

@@ -51,7 +51,7 @@ export const NewEmployeeForm = () => {
   return (
     <Wrapper>
       <Toaster />
-      <Link to={location?.state ?? "/admin"}>
+      <Link to={location?.state ?? "/employes"}>
         <Button variant="contained">Назад</Button>
       </Link>
       <Title>Добавить сотрудника</Title>

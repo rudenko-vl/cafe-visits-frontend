@@ -32,7 +32,7 @@ export const Header = () => {
         <Navigation>
           {isLogged && (
             <div>
-              <Link to="/employes">
+              <Link to="/main">
                 <HeaderBtn sx={{ marginRight: "30px" }} variant="contained">
                   Главная
                 </HeaderBtn>
@@ -51,7 +51,7 @@ export const Header = () => {
           ) : (
             <HeaderBtn
               variant="contained"
-              color="success"
+              color="error"
               onClick={handleOpenModal}
             >
               Выйти
@@ -59,7 +59,7 @@ export const Header = () => {
           )}
         </Navigation>
         {isAdmin && (
-          <Link to="/admin">
+          <Link to="/employes">
             <HeaderBtn sx={{ marginLeft: "30px" }} variant="contained">
               Admin
             </HeaderBtn>

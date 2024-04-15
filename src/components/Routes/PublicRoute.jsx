@@ -7,7 +7,7 @@ export default function PublicRoute({ children, restricted = false }) {
   const isLoggedIn = useSelector(getIsLoggedIn);
   const shouldRedirect = restricted && isLoggedIn;
 
-  return shouldRedirect ? <Navigate to="/employes" /> : children;
+  return shouldRedirect ? <Navigate to="/main" /> : children;
 }
 
 PublicRoute.propTypes = {

@@ -10,3 +10,4 @@ export * from "./Footer/Footer";
 export * from "./NewVisitForm/NewVisitForm";
 export * from "./Workers/Workers";
 export * from "./WorkerItem/WorkerItem";
+export * from "./UpdateWorker/UpdateWorker";

@@ -14,7 +14,6 @@ import { getFilter } from "../../redux/filter/selectors";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { WorkerItem } from "../../components";
-import { Item, Text, BtnSpan } from "../WorkerItem/WorkerItem.styled";
 
 export const Workers = () => {
   const { data: allPersons } = useGetEmployesQuery();
@@ -45,40 +44,40 @@ export const Workers = () => {
           </Link>
           <Filter value={value} />
           <WorkersList>
-            <Item>
-              <Text style={{ flex: "0.2", fontWeight: "700", color: "blue" }}>
-                №
-              </Text>
-              <Text style={{ flex: "0.3", fontWeight: "700", color: "blue" }}>
-                Код
-              </Text>
-              <Text style={{ flex: "0.7", fontWeight: "700", color: "blue" }}>
-                ФИО
-              </Text>
-              <BtnSpan style={{ flex: "0.2" }}></BtnSpan>
-            </Item>
-            {filteredPersons
-              .sort(function (a, b) {
-                const nameA = a.name.toUpperCase();
-                const nameB = b.name.toUpperCase();
+            <table>
+              <thead>
+                <tr>
+                  <th>№</th>
+                  <th>Код</th>
+                  <th>Имя</th>
+                  <th>Ссылка</th>
+                </tr>
+              </thead>
+              <tbody>
+                {filteredPersons
+                  .sort(function (a, b) {
+                    const nameA = a.name.toUpperCase();
+                    const nameB = b.name.toUpperCase();
 
-                if (nameA < nameB) {
-                  return -1;
-                }
-                if (nameA > nameB) {
-                  return 1;
-                }
-                return 0;
-              })
-              .map((person, index) => (
-                <WorkerItem
-                  key={person._id}
-                  id={person._id}
-                  index={index}
-                  name={person.name}
-                  code={person.code}
-                />
-              ))}
+                    if (nameA < nameB) {
+                      return -1;
+                    }
+                    if (nameA > nameB) {
+                      return 1;
+                    }
+                    return 0;
+                  })
+                  .map((person, index) => (
+                    <WorkerItem
+                      key={person._id}
+                      id={person._id}
+                      index={index}
+                      name={person.name}
+                      code={person.code}
+                    />
+                  ))}
+              </tbody>
+            </table>
           </WorkersList>
         </Box>
       </Wrapper>

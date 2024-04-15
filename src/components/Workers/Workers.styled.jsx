@@ -29,7 +29,7 @@ export const Box = styled.div`
   border-radius: 8px;
   padding: 10px;
 `;
-export const WorkersList = styled.ul`
+export const WorkersList = styled.div`
   list-style: none;
   padding: 20px;
   width: 70vw;
