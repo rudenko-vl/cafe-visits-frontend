@@ -28,13 +28,13 @@ export const notifyError = (text) =>
 export const notifyWarning = (text) =>
   toast(text, {
     icon: "❕",
-    duration: 2000,
+    duration: 5000,
     style: {
       fontWeight: 700,
-      fontSize: "18px",
-      backgroundColor: "#f2fa0f",
-      color: "#651fff",
+      fontSize: "22px",
+      backgroundColor: "#f4f87f",
+      color: "#000acb",
       width: "500px",
-      height: "40px",
+      height: "60px",
     },
   });

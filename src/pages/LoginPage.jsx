@@ -4,11 +4,9 @@ import { getIsAuthorizing } from "../redux/auth/auth-selectors";
 
 const LoginPage = () => {
   const auth = useSelector(getIsAuthorizing);
-  console.log(auth);
 
   if (auth === "loading") {
     return <Loader size={100} />;
-    // return "loading...";
   } else {
     return (
       <>

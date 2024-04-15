@@ -5,3 +5,4 @@ export * from "./LoginPage";
 export * from "./PreviewPage";
 export * from "./HistoryPage";
 export * from "./NewEmployeePage";
+export * from "./UpdatePage";

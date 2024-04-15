@@ -9,3 +9,4 @@ export * from "./Filter/Filter";
 export * from "./Footer/Footer";
 export * from "./NewVisitForm/NewVisitForm";
 export * from "./Workers/Workers";
+export * from "./WorkerItem/WorkerItem";

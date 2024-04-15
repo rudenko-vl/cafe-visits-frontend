@@ -10,6 +10,7 @@ export const DelBtn = styled.span`
   cursor: pointer;
   > svg {
     color: #f20909;
+    font-size: 24px;
     &:hover {
       color: #a80b03;
     }
@@ -30,8 +31,9 @@ export const Box = styled.div`
 `;
 export const WorkersList = styled.ul`
   list-style: none;
-  padding: 10px;
-  min-width: 400px;
+  padding: 20px;
+  width: 70vw;
+  background: white;
 `;
 
 export const Title = styled.h2`
@@ -52,4 +54,18 @@ export const AddBtn = styled.span`
     color: white;
     font-size: 34px;
   }
+  &:hover > span {
+    opacity: 1;
+  }
+`;
+export const Clue = styled.span`
+  background: yellow;
+  color: blue;
+  width: 100px;
+  height: 30px;
+  opacity: 0;
+  transition: 700ms;
+  margin-left: 10px;
+  padding: 5px;
+  border-radius: 5px;
 `;

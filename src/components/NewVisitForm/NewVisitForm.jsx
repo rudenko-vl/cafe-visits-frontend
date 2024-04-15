@@ -62,7 +62,7 @@ export const NewVisitForm = () => {
       setSearchedPerson({});
       setTimeout(() => {
         location.reload();
-      }, 2000);
+      }, 5000);
       return notifyWarning("Сотрудник не найден");
     } else if (listNames.includes(newVisit.trim().toLowerCase())) {
       setInputValue("");

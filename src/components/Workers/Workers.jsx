@@ -1,29 +1,23 @@
 import {
   Wrapper,
-  DelBtn,
   WorkersList,
-  UpdBtn,
   Box,
   Title,
   AddBtn,
   SubTitle,
+  Clue,
 } from "./Workers.styled";
 import { Loader, Filter } from "../../components";
-import { RiDeleteBin6Line } from "react-icons/ri";
-import { BiEditAlt } from "react-icons/bi";
 import { IoMdPersonAdd } from "react-icons/io";
-import {
-  useGetEmployesQuery,
-  useDeleteEmployeeMutation,
-} from "../../redux/employesApi";
+import { useGetEmployesQuery } from "../../redux/employesApi";
 import { getFilter } from "../../redux/filter/selectors";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import { WorkerItem } from "../../components";
+import { Item, Text, BtnSpan } from "../WorkerItem/WorkerItem.styled";
 
 export const Workers = () => {
-  const { data: allPersons, refetch: refetchPersons } = useGetEmployesQuery();
-  const [removePerson, object] = useDeleteEmployeeMutation();
-  const deleting = object.isLoading;
+  const { data: allPersons } = useGetEmployesQuery();
   const value = useSelector(getFilter);
 
   const filteredPersons =
@@ -35,67 +29,59 @@ export const Workers = () => {
         )
       : [];
 
-  const handleDeletePerson = async (id) => {
-    await removePerson(id).unwrap();
-    setTimeout(() => {
-      refetchPersons();
-    }, 700);
-  };
-  return (
-    <Wrapper>
-      <Box>
-        <Title>Список сотрудников</Title>
-        <SubTitle>Кол-во сотрудников - {filteredPersons?.length}</SubTitle>
-        <Link to="/new">
-          <AddBtn>
-            <IoMdPersonAdd />
-          </AddBtn>
-        </Link>
+  if (!filteredPersons) {
+    return <Loader size={80} />;
+  } else {
+    return (
+      <Wrapper>
+        <Box>
+          <Title>Список сотрудников</Title>
+          <SubTitle>Кол-во сотрудников - {filteredPersons?.length}</SubTitle>
+          <Link to="/new">
+            <AddBtn>
+              <IoMdPersonAdd />
+              <Clue>Новый сотрудник</Clue>
+            </AddBtn>
+          </Link>
+          <Filter value={value} />
+          <WorkersList>
+            <Item>
+              <Text style={{ flex: "0.2", fontWeight: "700", color: "blue" }}>
+                №
+              </Text>
+              <Text style={{ flex: "0.3", fontWeight: "700", color: "blue" }}>
+                Код
+              </Text>
+              <Text style={{ flex: "0.7", fontWeight: "700", color: "blue" }}>
+                ФИО
+              </Text>
+              <BtnSpan style={{ flex: "0.2" }}></BtnSpan>
+            </Item>
+            {filteredPersons
+              .sort(function (a, b) {
+                const nameA = a.name.toUpperCase();
+                const nameB = b.name.toUpperCase();
 
-        <Filter value={value} />
-
-        <WorkersList>
-          {!allPersons ? (
-            <Loader />
-          ) : (
-            <table>
-              <thead>
-                <tr>
-                  <th>№</th>
-                  <th>Код</th>
-                  <th>Имя</th>
-                  <th>Удалить</th>
-                  <th>Обновить</th>
-                </tr>
-              </thead>
-              <tbody>
-                {filteredPersons &&
-                  filteredPersons.map((person, index) => (
-                    <tr key={person._id}>
-                      <td>{index + 1}</td>
-                      <td>{person.code}</td>
-                      <td>{person.name}</td>
-                      <td>
-                        <DelBtn onClick={() => handleDeletePerson(person._id)}>
-                          {deleting ? (
-                            <Loader size={20} />
-                          ) : (
-                            <RiDeleteBin6Line />
-                          )}
-                        </DelBtn>
-                      </td>
-                      <td>
-                        <UpdBtn>
-                          <BiEditAlt />
-                        </UpdBtn>
-                      </td>
-                    </tr>
-                  ))}
-              </tbody>
-            </table>
-          )}
-        </WorkersList>
-      </Box>
-    </Wrapper>
-  );
+                if (nameA < nameB) {
+                  return -1;
+                }
+                if (nameA > nameB) {
+                  return 1;
+                }
+                return 0;
+              })
+              .map((person, index) => (
+                <WorkerItem
+                  key={person._id}
+                  id={person._id}
+                  index={index}
+                  name={person.name}
+                  code={person.code}
+                />
+              ))}
+          </WorkersList>
+        </Box>
+      </Wrapper>
+    );
+  }
 };

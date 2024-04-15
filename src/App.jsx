@@ -19,6 +19,7 @@ import ErrorPage from "./pages/ErrorPage";
 import HistoryPage from "./pages/HistoryPage";
 import NewEmployeePage from "./pages/NewEmployeePage";
 import AdminPage from "./pages/AdminPage";
+import UpdatePage from "./pages/UpdatePage";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -55,6 +56,15 @@ const router = createBrowserRouter(
         element={
           <PrivateRoute restricted>
             <NewEmployeePage />
+          </PrivateRoute>
+        }
+        errorElement={<ErrorPage />}
+      ></Route>
+      <Route
+        path="/update"
+        element={
+          <PrivateRoute restricted>
+            <UpdatePage />
           </PrivateRoute>
         }
         errorElement={<ErrorPage />}
