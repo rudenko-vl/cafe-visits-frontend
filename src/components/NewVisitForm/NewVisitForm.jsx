@@ -101,18 +101,23 @@ export const NewVisitForm = () => {
     return (
       <Wrapper>
         <Toaster />
-        <h2 style={{ color: "white" }}>Добавить запись</h2>
+
         <FormWrapper>
-          <SearchInput
-            type="text"
-            placeholder="Поиск"
-            onChange={handlerInputChange}
-            ref={searchInputRef}
-          />
-          <ClearBtn onClick={() => location.reload()}>
-            <AiOutlineClear />
-          </ClearBtn>
-          <form onSubmit={handleSubmit}>
+          <ButtonSubmit type="button" onClick={handleSubmit}>
+            Записать
+          </ButtonSubmit>
+          <div style={{ display: "flex", alignItems: "center" }}>
+            <SearchInput
+              type="text"
+              placeholder="Поиск"
+              onChange={handlerInputChange}
+              ref={searchInputRef}
+            />
+            <ClearBtn onClick={() => location.reload()}>
+              <AiOutlineClear />
+            </ClearBtn>
+          </div>
+          <form>
             <Input
               type="text"
               readOnly
@@ -120,7 +125,6 @@ export const NewVisitForm = () => {
               disabled={true}
               ref={inputRef}
             />
-            <ButtonSubmit type="submit">Записать</ButtonSubmit>
           </form>
         </FormWrapper>
 

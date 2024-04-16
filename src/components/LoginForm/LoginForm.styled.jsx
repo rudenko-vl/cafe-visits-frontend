@@ -45,11 +45,25 @@ export const RegNav = styled(Link)`
 `;
 
 export const PreviewTitle = styled.h1`
-  background: #000000a6;
   color: white;
-  font-size: 36px;
+  font-size: 16px;
   text-align: center;
-  width: 600px;
   margin: 0 auto;
   padding: 10px;
+  @media screen and (min-width: 480px) {
+    font-size: 22px;
+  }
+  @media screen and (min-width: 800px) {
+    font-size: 28px;
+  }
+`;
+
+export const PreviewDiv = styled.div`
+  padding: 0px 40px;
+  background: #000000e3;
+`;
+export const LoginLink = styled.span`
+  > a {
+    color: red;
+  }
 `;

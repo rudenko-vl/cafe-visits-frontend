@@ -1,12 +1,24 @@
 import { Footer, Header } from "../components";
-import { PreviewTitle } from "../components/LoginForm/LoginForm.styled";
+import {
+  PreviewTitle,
+  PreviewDiv,
+  LoginLink,
+} from "../components/LoginForm/LoginForm.styled";
+import { Link } from "react-router-dom";
 
 const PreviewPage = () => {
   return (
     <>
       <Header />
       <div className="preview">
-        <PreviewTitle>Войдите или зарегистрируйтесь!</PreviewTitle>
+        <PreviewDiv>
+          <PreviewTitle>
+            Войдите или зарегистрируйтесь! 👉{" "}
+            <LoginLink>
+              <Link to="/auth/login">Вход</Link>
+            </LoginLink>
+          </PreviewTitle>
+        </PreviewDiv>
       </div>
       <Footer />
     </>
