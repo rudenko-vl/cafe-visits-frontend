@@ -16,7 +16,6 @@ export const regUser = createAsyncThunk(
   async (credentials, { rejectWithValue }) => {
     try {
       const { data } = await axios.post("/auth/register", credentials);
-      console.log(data);
       setToken(data.token);
       return data;
     } catch (error) {

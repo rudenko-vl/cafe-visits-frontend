@@ -28,7 +28,7 @@ export const Workers = () => {
         )
       : [];
 
-  if (!filteredPersons) {
+  if (!allPersons) {
     return <Loader size={80} />;
   } else {
     return (

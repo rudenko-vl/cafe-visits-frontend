@@ -66,7 +66,7 @@ export const HeaderBtn = styled(Button)`
 `;
 
 export const HeaderLink = styled(NavLink)`
-  font-size: 22px;
+  font-size: 18px;
   font-weight: 700;
   color: white;
   transition: transform 700ms cubic-bezier(0.4, 0, 0.2, 1);
@@ -111,7 +111,7 @@ export const LogoTxt = styled.span`
 export const BurgerMenu = styled.div`
   cursor: pointer;
   display: block;
-  @media screen and (min-width: 700px) {
+  @media screen and (min-width: 701px) {
     display: none;
   }
   > svg {

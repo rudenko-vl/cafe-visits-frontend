@@ -4,11 +4,17 @@ import { Link } from "react-router-dom";
 export const Form = styled.form`
   display: flex;
   flex-direction: column;
-  width: 400px;
+  width: 220px;
   padding: 30px;
   outline: 1px solid white;
   border-radius: 10px;
   margin: 40px auto;
+  @media screen and (min-width: 460px) {
+    width: 350px;
+  }
+  @media screen and (min-width: 780px) {
+    width: 400px;
+  }
 `;
 export const Label = styled.label`
   font-weight: 500;
@@ -18,7 +24,7 @@ export const Label = styled.label`
 
 export const Input = styled.input`
   padding: 5px;
-  height: 40px;
+  height: 30px;
   border: 1px solid rgba(33, 33, 33, 0.2);
   border-radius: 4px;
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
@@ -30,6 +36,9 @@ export const Input = styled.input`
   }
   :hover {
     border-color: green;
+  }
+  @media screen and (min-width: 780px) {
+    height: 40px;
   }
 `;
 

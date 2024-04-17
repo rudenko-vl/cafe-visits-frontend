@@ -85,7 +85,6 @@ export const NewVisitForm = () => {
     setSearchedPerson(searchedPerson);
     if (e.target.value !== "") {
       const finded = findPersonByCode(e.target.value);
-      console.log(finded);
       if (!finded) {
         return null;
       } else {

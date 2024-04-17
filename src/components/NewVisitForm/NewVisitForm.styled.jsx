@@ -13,49 +13,8 @@ export const FormWrapper = styled.div`
   margin-top: 30px;
 `;
 
-export const SearchInput = styled.input`
-  position: relative;
-  width: 350px;
-  height: 30px;
-  margin-top: 20px;
-  border: 2px solid yellow;
-  border-radius: 6px;
-  font-size: 18px;
-  @media screen and (min-width: 760px) {
-    width: 450px;
-    height: 50px;
-    font-size: 26px;
-  }
-`;
-
-export const Input = styled.input`
-  width: 350px;
-  height: 30px;
-  margin-top: 20px;
-  border: 2px solid yellow;
-  border-radius: 6px;
-  font-size: 22px;
-  font-weight: 700;
-  color: white;
-  padding: 5px;
-  @media screen and (min-width: 760px) {
-    width: 450px;
-    height: 50px;
-    font-size: 26px;
-  }
-`;
-
-export const Image = styled.img`
-  width: 200px;
-  height: 200px;
-  @media screen and (min-width: 830px) {
-    width: 400px;
-    height: 400px;
-  }
-`;
-
 export const ButtonSubmit = styled.button`
-  width: 350px;
+  width: 250px;
   height: 60px;
   font-size: 18px;
   background-color: green;
@@ -65,8 +24,63 @@ export const ButtonSubmit = styled.button`
   border-radius: 8px;
   border: none;
   cursor: pointer;
+
+  @media screen and (min-width: 460px) {
+    width: 350px;
+  }
+
   @media screen and (min-width: 760px) {
     width: 450px;
+  }
+`;
+
+export const SearchInput = styled.input`
+  position: relative;
+  width: 250px;
+  height: 30px;
+  margin-top: 20px;
+  border: 2px solid yellow;
+  border-radius: 6px;
+  font-size: 18px;
+  @media screen and (min-width: 460px) {
+    width: 350px;
+    font-size: 20px;
+  }
+  @media screen and (min-width: 760px) {
+    width: 450px;
+    height: 40px;
+    font-size: 22px;
+  }
+`;
+
+export const Input = styled.input`
+  width: 250px;
+  height: 30px;
+  margin-top: 20px;
+  border: 2px solid yellow;
+  border-radius: 6px;
+  font-size: 18px;
+  font-weight: 700;
+  color: white;
+  padding: 5px;
+  @media screen and (min-width: 460px) {
+    width: 350px;
+    font-size: 20px;
+  }
+
+  @media screen and (min-width: 760px) {
+    width: 450px;
+    height: 40px;
+    font-size: 22px;
+  }
+`;
+
+export const Image = styled.img`
+  width: 200px;
+  height: 200px;
+  @media screen and (min-width: 1200px) {
+    width: 400px;
+    height: 400px;
   }
 `;
 
