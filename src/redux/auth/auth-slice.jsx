@@ -17,7 +17,8 @@ const authSlice = createSlice({
   extraReducers: (builder) => {
     builder.addCase(regUser.pending, (state) => {
       state.error = null;
-      state.isAuthorizing = false;
+      state.isAuthorizing = "loading";
+      state.user = null;
     });
     builder.addCase(regUser.fulfilled, (state, { payload }) => {
       state.user = payload.user;
@@ -32,6 +33,11 @@ const authSlice = createSlice({
     builder.addCase(login.pending, (state) => {
       state.error = null;
       state.isAuthorizing = "loading";
+      state.user = {
+        name: "loading",
+        email: "loading",
+        admin: "loading",
+      };
     });
     builder.addCase(login.fulfilled, (state, { payload }) => {
       state.user = payload.user;

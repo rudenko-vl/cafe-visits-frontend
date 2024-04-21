@@ -6,13 +6,18 @@ import { useGetEmployesQuery } from "../../redux/employesApi";
 import { DelBtn, Clue, BtnWrapper } from "./UpdateWorker.styled";
 import { RiDeleteBin6Line } from "react-icons/ri";
 import { Loader, Modal } from "../../components";
+import { notifySuccess } from "../Notify/Notify";
+import { Toaster } from "react-hot-toast";
 import { useDeleteEmployeeMutation } from "../../redux/employesApi";
 import { BtnBox, HeaderBtn } from "../Header/Header.styled";
+import { useUpdateEmployeeMutation } from "../../redux/employesApi";
 
 export const UpdateWorker = () => {
   const { _id } = useParams();
   const workers = useGetEmployesQuery();
   const workersList = workers?.data;
+
+  const [update, obj] = useUpdateEmployeeMutation();
 
   function findPersonById(_id) {
     return workersList?.find((person) => {
@@ -20,6 +25,23 @@ export const UpdateWorker = () => {
     });
   }
   const onePerson = findPersonById(_id);
+
+  const [formData, setFormData] = useState({
+    name: onePerson?.name || "",
+    code: onePerson?.code || "",
+    imgUrl: onePerson?.imgUrl || "",
+  });
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
+  };
+
+  const updatedData = {
+    name: formData?.name,
+    imgUrl: formData?.imgUrl,
+    code: formData?.code,
+  };
 
   const [removePerson, object] = useDeleteEmployeeMutation();
   const deleting = object.isLoading;
@@ -31,12 +53,32 @@ export const UpdateWorker = () => {
   const handleDeletePerson = async (id) => {
     await removePerson(id).unwrap();
     handleCloseModal();
+    formData.name = "";
+    formData.code = "";
+    formData.imgUrl = "";
+    setTimeout(() => {
+      notifySuccess("Успешно удалено!");
+    }, 500);
   };
+
+  const handlerSubmit = () => {
+    const data = { ...updatedData, _id };
+    update(data);
+    if (obj.status == "fulfilled") {
+      setTimeout(() => {
+        notifySuccess("Успешно обновлено!");
+      }, 700);
+    }
+  };
+
+  const values = [onePerson?.name, onePerson?.imgUrl, onePerson?.code];
+  const newValues = Object.keys(updatedData).map((key) => updatedData[key]);
+  const areEqual = JSON.stringify(values) === JSON.stringify(newValues);
 
   return (
     <Wrapper>
       <BtnWrapper>
-        <DelBtn onClick={handleOpenModal}>
+        <DelBtn disabled={!onePerson ? true : false} onClick={handleOpenModal}>
           <RiDeleteBin6Line />
           <Clue>Удалить запись</Clue>
         </DelBtn>
@@ -50,9 +92,9 @@ export const UpdateWorker = () => {
       <TextField
         sx={{ marginBottom: "15px" }}
         type="text"
-        name="Name"
-        value={onePerson?.name || ""}
-        // onChange={handleInputChange}
+        name="name"
+        value={formData?.name || ""}
+        onChange={handleInputChange}
         autoComplete="off"
         label="Name"
         variant="outlined"
@@ -61,17 +103,20 @@ export const UpdateWorker = () => {
         sx={{ marginBottom: "15px" }}
         type="text"
         name="code"
-        value={onePerson?.code || ""}
+        value={formData?.code || ""}
+        onChange={handleInputChange}
         autoComplete="off"
+        disabled={true}
         label="Code"
         variant="outlined"
       />
       <TextField
         sx={{ marginBottom: "15px" }}
         type="text"
-        name="link"
+        name="imgUrl"
         autoComplete="off"
-        value={onePerson?.imgUrl || ""}
+        value={formData?.imgUrl || ""}
+        onChange={handleInputChange}
         label="Link"
         variant="outlined"
       />
@@ -88,10 +133,10 @@ export const UpdateWorker = () => {
         variant="contained"
         color="success"
         type="button"
-        disabled={true}
-        // onClick={handlerSubmit}
+        disabled={areEqual || !onePerson ? true : false}
+        onClick={handlerSubmit}
       >
-        Обновить
+        {obj.isLoading ? <Loader size={20} /> : "Обновить"}
       </Button>
 
       <Modal isOpen={isModalOpen} onClose={handleCloseModal}>
@@ -114,6 +159,7 @@ export const UpdateWorker = () => {
           </HeaderBtn>
         </BtnBox>
       </Modal>
+      <Toaster />
     </Wrapper>
   );
 };

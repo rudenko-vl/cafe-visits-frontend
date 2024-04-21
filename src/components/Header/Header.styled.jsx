@@ -62,7 +62,11 @@ export const BtnBox = styled.ul`
 `;
 
 export const HeaderBtn = styled(Button)`
-  font-weight: 700;
+  font-weight: 600;
+  > svg {
+    color: #ffffff;
+    font-size: 20px;
+  }
 `;
 
 export const HeaderLink = styled(NavLink)`

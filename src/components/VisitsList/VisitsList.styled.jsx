@@ -32,10 +32,10 @@ export const Item = styled.li`
 export const TopWrap = styled.div`
   width: 100%;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
-  gap: 30px;
-  margin-bottom: 20px;
+  margin: 10px;
 `;
 export const SubTitle = styled.h3`
   color: white;

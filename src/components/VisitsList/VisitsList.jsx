@@ -2,13 +2,11 @@ import { Container } from "./VisitsList.styled";
 import { SubTitle, TopWrap } from "./VisitsList.styled";
 import { useGetVisitsQuery } from "../../redux/visitsApi";
 import { Filter } from "../../components";
-import { getFilter } from "../../redux/filter/selectors";
-import { useSelector } from "react-redux";
+import { useState } from "react";
 
 export const VisitsList = () => {
+  const [value, setValue] = useState("");
   const { data: visitsList } = useGetVisitsQuery();
-
-  const value = useSelector(getFilter);
 
   const filteredVisits =
     visitsList?.length > 0
@@ -23,13 +21,24 @@ export const VisitsList = () => {
         )
       : [];
 
+  const changeFilter = (e) => {
+    setValue(e.target.value);
+  };
+  const clearFilter = () => {
+    setValue("");
+  };
+
   return (
     <Container>
       <TopWrap>
         <SubTitle style={{ margin: "0" }}>
           Кол-во записей - {filteredVisits?.length}
         </SubTitle>
-        <Filter value={value} />
+        <Filter
+          value={value}
+          clearFilter={clearFilter}
+          changeFilter={changeFilter}
+        />
       </TopWrap>
       <table>
         <thead>

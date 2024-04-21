@@ -25,6 +25,7 @@ import { Modal } from "../Modal/Modal";
 import { Loader } from "../Loader/Loader";
 import { Link } from "react-router-dom";
 import { GiHamburgerMenu } from "react-icons/gi";
+import { MdOutlineLogin } from "react-icons/md";
 
 export const Header = () => {
   const isLogged = useSelector(getIsLoggedIn);
@@ -76,7 +77,7 @@ export const Header = () => {
                   color="error"
                   onClick={handleOpenModal}
                 >
-                  Выйти
+                  Выйти <MdOutlineLogin />
                 </HeaderBtn>
               </NavItem>
             </NavList>

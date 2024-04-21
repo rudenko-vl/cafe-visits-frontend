@@ -1,13 +1,9 @@
-import { useDispatch } from "react-redux";
 import { Box, TextField } from "@mui/material";
-import { inputСhange } from "../../redux/filter/action";
-import { TopWrapper } from "./Filter.styled";
+import { TopWrapper, ClearBtn } from "./Filter.styled";
+import { MdOutlineClear } from "react-icons/md";
 import PropTypes from "prop-types";
 
-export const Filter = ({ value }) => {
-  const dispatch = useDispatch();
-
-  const changeFilter = ({ target: { value } }) => dispatch(inputСhange(value));
+export const Filter = ({ value, changeFilter, clearFilter }) => {
   return (
     <>
       <TopWrapper>
@@ -20,8 +16,6 @@ export const Filter = ({ value }) => {
           autoComplete="off"
           type="text"
           name="filter"
-          value={value}
-          onChange={changeFilter}
         >
           <TextField
             size="small"
@@ -29,8 +23,18 @@ export const Filter = ({ value }) => {
             variant="filled"
             color="success"
             sx={{ backgroundColor: "white", borderRadius: "5px" }}
+            value={value}
+            onChange={changeFilter}
           />
         </Box>
+        <ClearBtn
+          disabled={!value ? true : false}
+          color="error"
+          variant="contained"
+          onClick={clearFilter}
+        >
+          <MdOutlineClear />
+        </ClearBtn>
       </TopWrapper>
     </>
   );
@@ -38,4 +42,6 @@ export const Filter = ({ value }) => {
 
 Filter.propTypes = {
   value: PropTypes.string,
+  clearFilter: PropTypes.func,
+  changeFilter: PropTypes.func,
 };

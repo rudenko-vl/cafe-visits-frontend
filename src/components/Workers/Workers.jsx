@@ -6,18 +6,18 @@ import {
   AddBtn,
   SubTitle,
   Clue,
+  TopWrapper,
 } from "./Workers.styled";
 import { Loader, Filter } from "../../components";
 import { IoMdPersonAdd } from "react-icons/io";
 import { useGetEmployesQuery } from "../../redux/employesApi";
-import { getFilter } from "../../redux/filter/selectors";
-import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { WorkerItem } from "../../components";
+import { useState } from "react";
 
 export const Workers = () => {
   const { data: allPersons } = useGetEmployesQuery();
-  const value = useSelector(getFilter);
+  const [value, setValue] = useState("");
 
   const filteredPersons =
     allPersons?.length > 0
@@ -28,6 +28,13 @@ export const Workers = () => {
         )
       : [];
 
+  const changeFilter = (e) => {
+    setValue(e.target.value);
+  };
+  const clearFilter = () => {
+    setValue("");
+  };
+
   if (!allPersons) {
     return <Loader size={80} />;
   } else {
@@ -35,14 +42,21 @@ export const Workers = () => {
       <Wrapper>
         <Box>
           <Title>Список сотрудников</Title>
-          <SubTitle>Кол-во сотрудников - {filteredPersons?.length}</SubTitle>
-          <Link to="/new">
-            <AddBtn>
-              <IoMdPersonAdd />
-              <Clue>Новый сотрудник</Clue>
-            </AddBtn>
-          </Link>
-          <Filter value={value} />
+          <TopWrapper>
+            <Link to="/new">
+              <AddBtn>
+                <IoMdPersonAdd />
+                <Clue>Новый сотрудник</Clue>
+              </AddBtn>
+            </Link>
+            <SubTitle>Кол-во сотрудников - {filteredPersons?.length}</SubTitle>
+          </TopWrapper>
+
+          <Filter
+            value={value}
+            clearFilter={clearFilter}
+            changeFilter={changeFilter}
+          />
           <WorkersList>
             <table>
               <thead>

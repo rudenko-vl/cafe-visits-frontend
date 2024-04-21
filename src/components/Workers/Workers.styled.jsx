@@ -6,6 +6,12 @@ export const Wrapper = styled.div`
   margin: 0 auto;
 `;
 
+export const TopWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
+
 export const DelBtn = styled.span`
   cursor: pointer;
   > svg {
@@ -33,7 +39,9 @@ export const WorkersList = styled.div`
   list-style: none;
   padding: 20px;
   width: 70vw;
+  height: 40vh;
   background: white;
+  overflow: auto;
 `;
 
 export const Title = styled.h2`
@@ -44,11 +52,9 @@ export const Title = styled.h2`
 export const SubTitle = styled.h3`
   color: white;
   text-align: center;
-  margin-top: 20px;
 `;
 
 export const AddBtn = styled.span`
-  margin-left: 20px;
   cursor: pointer;
   > svg {
     color: white;

@@ -4,7 +4,7 @@ export const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   padding: 35px;
-  width: 600px;
+  width: 500px;
   background-color: #ffffff;
   margin: 20px auto;
 `;
@@ -15,7 +15,9 @@ export const Img = styled.img`
   margin: 0 auto;
 `;
 
-export const DelBtn = styled.span`
+export const DelBtn = styled.button`
+  border: none;
+  background: transparent;
   cursor: pointer;
   > svg {
     color: #f20909;
