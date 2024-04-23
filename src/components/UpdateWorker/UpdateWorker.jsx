@@ -7,7 +7,7 @@ import { DelBtn, Clue, BtnWrapper } from "./UpdateWorker.styled";
 import { RiDeleteBin6Line } from "react-icons/ri";
 import { Loader, Modal } from "../../components";
 import { notifySuccess } from "../Notify/Notify";
-import { Toaster } from "react-hot-toast";
+import { Toaster, toast } from "react-hot-toast";
 import { useDeleteEmployeeMutation } from "../../redux/employesApi";
 import { BtnBox, HeaderBtn } from "../Header/Header.styled";
 import { useUpdateEmployeeMutation } from "../../redux/employesApi";
@@ -63,12 +63,25 @@ export const UpdateWorker = () => {
 
   const handlerSubmit = () => {
     const data = { ...updatedData, _id };
-    update(data);
-    if (obj.status == "fulfilled") {
-      setTimeout(() => {
-        notifySuccess("Успешно обновлено!");
-      }, 700);
-    }
+    const myPromise = update(data);
+
+    toast.promise(
+      myPromise,
+      {
+        loading: "Обновление...",
+        success: "Успешно обновлено!",
+        error: "Error",
+      },
+      {
+        style: {
+          minWidth: "250px",
+        },
+        success: {
+          duration: 2000,
+          icon: "✅",
+        },
+      }
+    );
   };
 
   const values = [onePerson?.name, onePerson?.imgUrl, onePerson?.code];

@@ -2,16 +2,17 @@ import {
   Wrapper,
   WorkersList,
   Box,
-  Title,
   AddBtn,
   SubTitle,
   Clue,
   TopWrapper,
+  LinkWrapper,
+  Navigate,
 } from "./Workers.styled";
+import { Link } from "react-router-dom";
 import { Loader, Filter } from "../../components";
 import { IoMdPersonAdd } from "react-icons/io";
 import { useGetEmployesQuery } from "../../redux/employesApi";
-import { Link } from "react-router-dom";
 import { WorkerItem } from "../../components";
 import { useState } from "react";
 
@@ -41,7 +42,10 @@ export const Workers = () => {
     return (
       <Wrapper>
         <Box>
-          <Title>Список сотрудников</Title>
+          <LinkWrapper>
+            <Navigate to="/users">Список пользователей</Navigate>
+            <Navigate to="/employes">Список сотрудников</Navigate>
+          </LinkWrapper>
           <TopWrapper>
             <Link to="/new">
               <AddBtn>

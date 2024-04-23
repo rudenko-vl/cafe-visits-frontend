@@ -20,6 +20,7 @@ import HistoryPage from "./pages/HistoryPage";
 import NewEmployeePage from "./pages/NewEmployeePage";
 import AdminPage from "./pages/AdminPage";
 import UpdatePage from "./pages/UpdatePage";
+import UsersPage from "./pages/UsersPage";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -74,6 +75,15 @@ const router = createBrowserRouter(
         element={
           <PrivateRoute restricted>
             <HistoryPage />
+          </PrivateRoute>
+        }
+        errorElement={<ErrorPage />}
+      ></Route>
+      <Route
+        path="/users"
+        element={
+          <PrivateRoute restricted>
+            <UsersPage />
           </PrivateRoute>
         }
         errorElement={<ErrorPage />}

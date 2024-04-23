@@ -70,8 +70,14 @@ export const refreshUser = createAsyncThunk(
   }
 );
 
-export const getPerson = async (personId) => {
-  const response = await axios.get(`/employes/${personId}`);
+export const getUsers = async () => {
+  const response = await axios.get("/auth/all");
+  const data = response.data;
+  return data;
+};
+
+export const updateUser = async (userId, updatedUser) => {
+  const response = await axios.patch(`/auth/${userId}`, updatedUser);
   const data = response.data;
   return data;
 };

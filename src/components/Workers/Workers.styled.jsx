@@ -1,4 +1,14 @@
 import styled from "@emotion/styled";
+import { NavLink } from "react-router-dom";
+
+export const Navigate = styled(NavLink)`
+  color: white;
+  font-size: 20px;
+  text-decoration: underline;
+  &.active {
+    color: #e2e207;
+  }
+`;
 
 export const Wrapper = styled.div`
   display: flex;
@@ -44,11 +54,6 @@ export const WorkersList = styled.div`
   overflow: auto;
 `;
 
-export const Title = styled.h2`
-  color: white;
-  text-align: center;
-`;
-
 export const SubTitle = styled.h3`
   color: white;
   text-align: center;
@@ -74,4 +79,11 @@ export const Clue = styled.span`
   margin-left: 10px;
   padding: 5px;
   border-radius: 5px;
+`;
+
+export const LinkWrapper = styled.div`
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
+  margin: 10px auto;
 `;
