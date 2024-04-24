@@ -3,9 +3,9 @@ import { useParams, Link } from "react-router-dom";
 import { TextField, Button } from "@mui/material";
 import { Wrapper, Img } from "./UpdateWorker.styled";
 import { useGetEmployesQuery } from "../../redux/employesApi";
-import { DelBtn, Clue, BtnWrapper } from "./UpdateWorker.styled";
+import { DelBtn, BtnWrapper } from "./UpdateWorker.styled";
 import { RiDeleteBin6Line } from "react-icons/ri";
-import { Loader, Modal } from "../../components";
+import { Loader, Modal, Tooltip } from "../../components";
 import { notifySuccess } from "../Notify/Notify";
 import { Toaster, toast } from "react-hot-toast";
 import { useDeleteEmployeeMutation } from "../../redux/employesApi";
@@ -91,14 +91,17 @@ export const UpdateWorker = () => {
   return (
     <Wrapper>
       <BtnWrapper>
-        <DelBtn disabled={!onePerson ? true : false} onClick={handleOpenModal}>
-          <RiDeleteBin6Line />
-          <Clue>Удалить запись</Clue>
-        </DelBtn>
-        <Link to={"/employes"}>
-          <Button sx={{ fontWeight: "700" }} variant="contained">
-            Назад
-          </Button>
+        <Tooltip text="Удалить">
+          <DelBtn
+            disabled={!onePerson ? true : false}
+            onClick={handleOpenModal}
+          >
+            <RiDeleteBin6Line />
+          </DelBtn>
+        </Tooltip>
+
+        <Link to={"/employes"} style={{ color: "blue" }}>
+          Назад
         </Link>
       </BtnWrapper>
 

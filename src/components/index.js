@@ -12,3 +12,4 @@ export * from "./Workers/Workers";
 export * from "./WorkerItem/WorkerItem";
 export * from "./UpdateWorker/UpdateWorker";
 export * from "./UserItem/UserItem";
+export * from "./Tooltip/Tooltip";

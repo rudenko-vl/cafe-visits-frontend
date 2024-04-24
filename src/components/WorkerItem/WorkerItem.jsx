@@ -1,6 +1,7 @@
-import { Button } from "@mui/material";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
+import { FaUserEdit } from "react-icons/fa";
+import { Tooltip } from "../../components";
 
 export const WorkerItem = ({ index, name, code, id }) => {
   return (
@@ -10,15 +11,11 @@ export const WorkerItem = ({ index, name, code, id }) => {
       <td>{name}</td>
       <td>
         {
-          <Link to={`${id}`}>
-            <Button
-              color="success"
-              variant="contained"
-              sx={{ fontWeight: "700" }}
-            >
-              Открыть
-            </Button>
-          </Link>
+          <Tooltip text="Открыть">
+            <Link to={`${id}`}>
+              <FaUserEdit />
+            </Link>
+          </Tooltip>
         }
       </td>
     </tr>

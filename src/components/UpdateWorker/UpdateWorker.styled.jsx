@@ -3,10 +3,14 @@ import styled from "@emotion/styled";
 export const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
-  padding: 35px;
-  width: 500px;
+  padding: 25px;
+  width: 260px;
   background-color: #ffffff;
   margin: 20px auto;
+  @media screen and (min-width: 720px) {
+    width: 450px;
+    padding: 35px;
+  }
 `;
 
 export const Img = styled.img`
@@ -28,21 +32,9 @@ export const DelBtn = styled.button`
   }
 `;
 
-export const Clue = styled.span`
-  background: yellow;
-  color: blue;
-  width: 100px;
-  height: 30px;
-  opacity: 0;
-  transition: 700ms;
-  margin-left: 10px;
-  padding: 5px;
-  border-radius: 5px;
-`;
-
 export const BtnWrapper = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin: 30px 0px;
+  margin-bottom: 15px;
 `;

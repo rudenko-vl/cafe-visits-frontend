@@ -9,9 +9,6 @@ export const Filter = ({ value, changeFilter, clearFilter }) => {
       <TopWrapper>
         <Box
           component="form"
-          sx={{
-            "& .MuiTextField-root": { m: 1, width: "35ch" },
-          }}
           noValidate
           autoComplete="off"
           type="text"

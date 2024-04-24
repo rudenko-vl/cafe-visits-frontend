@@ -12,9 +12,9 @@ export const Wrapper = styled.div`
 export const Form = styled.form`
   display: flex;
   flex-direction: column;
-  width: 100%
+  width: 100%;
 `;
-export const Title = styled.h2`
+export const Title = styled.h3`
   text-align: center;
   margin: 15px 0;
   color: #1717ce;

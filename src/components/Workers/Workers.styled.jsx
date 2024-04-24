@@ -3,23 +3,33 @@ import { NavLink } from "react-router-dom";
 
 export const Navigate = styled(NavLink)`
   color: white;
-  font-size: 20px;
+  font-size: 15px;
   text-decoration: underline;
   &.active {
     color: #e2e207;
   }
+  @media screen and (min-width: 720px) {
+    font-size: 20px;
+  }
 `;
 
 export const Wrapper = styled.div`
-  display: flex;
-  padding: 30px;
+  padding: 20px;
   margin: 0 auto;
+  width: 90vw;
+  @media screen and (min-width: 720px) {
+    padding: 30px;
+    width: 80vw;
+  }
+  @media screen and (min-width: 1200px) {
+    width: 70vw;
+  }
 `;
 
 export const TopWrapper = styled.div`
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: space-around;
 `;
 
 export const DelBtn = styled.span`
@@ -48,7 +58,6 @@ export const Box = styled.div`
 export const WorkersList = styled.div`
   list-style: none;
   padding: 20px;
-  width: 70vw;
   height: 40vh;
   background: white;
   overflow: auto;
@@ -57,28 +66,21 @@ export const WorkersList = styled.div`
 export const SubTitle = styled.h3`
   color: white;
   text-align: center;
+  font-size: 15px;
+  @media screen and (min-width: 720px) {
+    font-size: 20px;
+  }
 `;
 
 export const AddBtn = styled.span`
   cursor: pointer;
   > svg {
     color: white;
-    font-size: 34px;
+    font-size: 26px;
+    @media screen and (min-width: 720px) {
+      font-size: 34px;
+    }
   }
-  &:hover > span {
-    opacity: 1;
-  }
-`;
-export const Clue = styled.span`
-  background: yellow;
-  color: blue;
-  width: 100px;
-  height: 30px;
-  opacity: 0;
-  transition: 700ms;
-  margin-left: 10px;
-  padding: 5px;
-  border-radius: 5px;
 `;
 
 export const LinkWrapper = styled.div`
@@ -86,4 +88,18 @@ export const LinkWrapper = styled.div`
   justify-content: space-around;
   width: 100%;
   margin: 10px auto;
+`;
+
+export const ExcelBtn = styled.button`
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  transition: 1.5s;
+  > svg {
+    color: white;
+    font-size: 22px;
+  }
+  & :hover {
+    color: green;
+  }
 `;

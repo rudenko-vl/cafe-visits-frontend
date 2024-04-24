@@ -4,21 +4,25 @@ import {
   Box,
   AddBtn,
   SubTitle,
-  Clue,
   TopWrapper,
   LinkWrapper,
   Navigate,
+  ExcelBtn,
 } from "./Workers.styled";
 import { Link } from "react-router-dom";
-import { Loader, Filter } from "../../components";
+import { Loader, Filter, WorkerItem, Tooltip } from "../../components";
 import { IoMdPersonAdd } from "react-icons/io";
 import { useGetEmployesQuery } from "../../redux/employesApi";
-import { WorkerItem } from "../../components";
-import { useState } from "react";
+import { useState, useRef } from "react";
+import { utils, writeFileXLSX } from "xlsx";
+import { SiMicrosoftexcel } from "react-icons/si";
+import { nanoid } from "nanoid";
 
 export const Workers = () => {
   const { data: allPersons } = useGetEmployesQuery();
   const [value, setValue] = useState("");
+
+  const tbl = useRef(null);
 
   const filteredPersons =
     allPersons?.length > 0
@@ -42,17 +46,31 @@ export const Workers = () => {
     return (
       <Wrapper>
         <Box>
+          <Tooltip text="Импорт в Excel">
+            <ExcelBtn
+              onClick={() => {
+                const fileName = nanoid(5);
+                const wb = utils.table_to_book(tbl.current);
+                writeFileXLSX(wb, `${fileName}.xlsx`);
+              }}
+            >
+              <SiMicrosoftexcel />
+            </ExcelBtn>
+          </Tooltip>
+
           <LinkWrapper>
             <Navigate to="/users">Список пользователей</Navigate>
             <Navigate to="/employes">Список сотрудников</Navigate>
           </LinkWrapper>
           <TopWrapper>
-            <Link to="/new">
-              <AddBtn>
-                <IoMdPersonAdd />
-                <Clue>Новый сотрудник</Clue>
-              </AddBtn>
-            </Link>
+            <Tooltip text="Добавить сотрудника">
+              <Link to="/new">
+                <AddBtn>
+                  <IoMdPersonAdd />
+                </AddBtn>
+              </Link>
+            </Tooltip>
+
             <SubTitle>Кол-во сотрудников - {filteredPersons?.length}</SubTitle>
           </TopWrapper>
 
@@ -62,7 +80,7 @@ export const Workers = () => {
             changeFilter={changeFilter}
           />
           <WorkersList>
-            <table>
+            <table ref={tbl}>
               <thead>
                 <tr>
                   <th>№</th>
