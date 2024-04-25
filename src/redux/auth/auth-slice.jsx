@@ -33,14 +33,13 @@ const authSlice = createSlice({
     builder.addCase(login.pending, (state) => {
       state.error = null;
       state.isAuthorizing = "loading";
-      state.user = {
-        name: "loading",
-        email: "loading",
-        admin: "loading",
-      };
     });
     builder.addCase(login.fulfilled, (state, { payload }) => {
-      state.user = payload.user;
+      state.user = {
+        name: payload.name,
+        email: payload.email,
+        admin: payload.admin,
+      };
       state.token = payload.token;
       state.isLoggedIn = true;
       state.isAuthorizing = true;
