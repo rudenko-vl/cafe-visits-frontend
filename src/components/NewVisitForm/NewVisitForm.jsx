@@ -6,17 +6,16 @@ import { AiOutlineClear } from "react-icons/ai";
 import { notifyWarning, notifySuccess, Loader } from "../../components";
 import {
   Wrapper,
-  Input,
   ButtonSubmit,
   SearchInput,
   FormWrapper,
   Image,
   ClearBtn,
+  Name,
 } from "./NewVisitForm.styled";
 import { debounce } from "lodash";
 
 export const NewVisitForm = () => {
-  const inputRef = useRef();
   const searchInputRef = useRef();
   const [inputValue, setInputValue] = useState("");
   const [searchedPerson, setSearchedPerson] = useState({});
@@ -43,13 +42,12 @@ export const NewVisitForm = () => {
   const year = currentDate.getFullYear();
   const month = currentDate.getMonth() + 1;
   const day = currentDate.getDate();
-  const today = day + "." + "0" + month + "." + year;
+  const today = day + "." + month + "." + year;
 
   const hours = currentDate.getHours();
   const minutes = currentDate.getMinutes();
-  const seconds = currentDate.getSeconds();
 
-  const time = `${hours}:${minutes}:${seconds}`;
+  const time = `${hours}:${minutes < 10 ? "0" : ""}${minutes}`;
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -114,29 +112,20 @@ export const NewVisitForm = () => {
               <AiOutlineClear />
             </ClearBtn>
           </div>
-          <form>
-            <Input
-              type="text"
-              readOnly
-              value={inputValue}
-              disabled={true}
-              ref={inputRef}
-            />
-          </form>
+          {searchedPerson?.name && (
+            <div>
+              <Name>{searchedPerson.name}</Name>
+              <Image
+                src={
+                  searchedPerson.imgUrl.includes("http")
+                    ? searchedPerson.imgUrl
+                    : "/avatar.jpg"
+                }
+                alt="img"
+              />
+            </div>
+          )}
         </FormWrapper>
-
-        {searchedPerson?.name && (
-          <div>
-            <Image
-              src={
-                searchedPerson.imgUrl.includes("http")
-                  ? searchedPerson.imgUrl
-                  : "/avatar.jpg"
-              }
-              alt="img"
-            />
-          </div>
-        )}
       </Wrapper>
     );
   }

@@ -53,9 +53,9 @@ export const SearchInput = styled.input`
   }
 `;
 
-export const Input = styled.input`
+export const Name = styled.p`
+  text-align: center;
   width: 250px;
-  height: 30px;
   margin-top: 20px;
   border: 2px solid yellow;
   border-radius: 6px;
@@ -70,7 +70,6 @@ export const Input = styled.input`
 
   @media screen and (min-width: 760px) {
     width: 450px;
-    height: 40px;
     font-size: 22px;
   }
 `;
@@ -78,6 +77,7 @@ export const Input = styled.input`
 export const Image = styled.img`
   width: 200px;
   height: 200px;
+  margin: 20px auto 0px auto;
   @media screen and (min-width: 1200px) {
     width: 400px;
     height: 400px;

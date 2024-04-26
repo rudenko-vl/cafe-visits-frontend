@@ -124,7 +124,10 @@ export const LogoTxt = styled.span`
 `;
 
 export const DrawerText = styled.p`
-  font-size: 22px;
+  font-size: 16px;
   font-style: italic;
   font-weight: 600;
+  @media screen and (min-width: 720px) {
+    font-size: 22px;
+  }
 `;
