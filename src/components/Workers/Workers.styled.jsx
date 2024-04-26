@@ -16,9 +16,9 @@ export const Navigate = styled(NavLink)`
 export const Wrapper = styled.div`
   padding: 20px;
   margin: 0 auto;
-  width: 90vw;
+  width: 80vw;
   @media screen and (min-width: 720px) {
-    padding: 30px;
+    padding: 25px;
     width: 80vw;
   }
   @media screen and (min-width: 1200px) {

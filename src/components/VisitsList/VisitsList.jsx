@@ -1,5 +1,4 @@
-import { Container } from "./VisitsList.styled";
-import { SubTitle, TopWrap } from "./VisitsList.styled";
+import { SubTitle, TopWrap, Container } from "./VisitsList.styled";
 import { ExcelBtn } from "../Workers/Workers.styled";
 import { useGetVisitsQuery } from "../../redux/visitsApi";
 import { Filter, Tooltip } from "../../components";

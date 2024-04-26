@@ -23,7 +23,7 @@ const authSlice = createSlice({
     builder.addCase(regUser.fulfilled, (state, { payload }) => {
       state.user = payload.user;
       state.token = payload.token;
-      state.isLoggedIn = true;
+      state.isLoggedIn = false;
       state.isAuthorizing = true;
     });
     builder.addCase(regUser.rejected, (state, { payload }) => {

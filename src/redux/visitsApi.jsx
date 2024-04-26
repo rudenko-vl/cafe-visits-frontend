@@ -41,15 +41,6 @@ export const visitsApi = createApi({
       }),
       invalidatesTags: [{ type: "visits", id: "LIST" }],
     }),
-    // updateOwner: build.mutation({
-    //   query: ({ _id, ...owner }) => ({
-    //     url: `options/name/${_id}`,
-    //     params: owner,
-    //     method: "PATCH",
-    //     body: owner,
-    //   }),
-    //   invalidatesTags: [{ type: 'options', id: 'LIST' }],
-    // }),
   }),
 });
 

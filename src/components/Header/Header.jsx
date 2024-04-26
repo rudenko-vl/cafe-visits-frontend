@@ -1,9 +1,11 @@
 import { useState } from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import {
   getIsLoggedIn,
   getUserAdmin,
   getIsAuthorizing,
+  getUserName,
+  getUserEmail,
 } from "../../redux/auth/auth-selectors";
 import {
   HeaderBox,
@@ -16,24 +18,33 @@ import {
   Logo,
   LogoImg,
   LogoTxt,
-  BurgerMenu,
   NavItem,
+  MobNavigation,
+  MobNavList,
+  MobNavItem,
+  DrawerText,
+  ExitBtn,
 } from "./Header.styled";
 import { logout } from "../../redux/auth/auth-operations";
-import { useDispatch } from "react-redux";
-import { Modal } from "../Modal/Modal";
-import { Loader } from "../Loader/Loader";
+import { Modal, Loader } from "../../components";
 import { Link } from "react-router-dom";
-import { GiHamburgerMenu } from "react-icons/gi";
 import { MdOutlineLogin } from "react-icons/md";
+import { Avatar, Box, Drawer } from "@mui/material";
 
 export const Header = () => {
   const isLogged = useSelector(getIsLoggedIn);
   const isAdmin = useSelector(getUserAdmin);
   const auth = useSelector(getIsAuthorizing);
+  const name = useSelector(getUserName);
+  const email = useSelector(getUserEmail);
 
-  const [mobMenu, setMobMenu] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const [open, setOpen] = useState(false);
+  const toggleDrawer = (newOpen) => () => {
+    setOpen(newOpen);
+  };
+
   const handleOpenModal = () => setIsModalOpen(true);
   const handleCloseModal = () => setIsModalOpen(false);
 
@@ -42,8 +53,14 @@ export const Header = () => {
     dispatch(logout());
   };
 
-  const closeMobMenu = () => {
-    setMobMenu(false);
+  const style = {
+    display: "flex",
+    flexDirection: "column",
+    height: "100vh",
+    background: "#31313b",
+    alignItems: "center",
+    gap: "15px",
+    padding: "30px 20px",
   };
 
   return (
@@ -59,34 +76,27 @@ export const Header = () => {
             <Flag></Flag>
           </Logo>
         </Link>
-        <Navigation className={`navigate ${mobMenu ? "active" : ""}`}>
+        <Navigation>
           {isLogged && (
             <NavList>
-              <NavItem onClick={closeMobMenu}>
+              <NavItem>
                 <HeaderLink to="/main">Главная</HeaderLink>
               </NavItem>
-              <NavItem onClick={closeMobMenu}>
+              <NavItem>
                 <HeaderLink to="/history">История</HeaderLink>
               </NavItem>
-              <NavItem onClick={closeMobMenu}>
+              <NavItem>
                 {isAdmin && <HeaderLink to="/employes">Админ</HeaderLink>}
-              </NavItem>
-              <NavItem onClick={closeMobMenu}>
-                <HeaderBtn
-                  variant="contained"
-                  color="error"
-                  onClick={handleOpenModal}
-                >
-                  Выйти <MdOutlineLogin />
-                </HeaderBtn>
               </NavItem>
             </NavList>
           )}
         </Navigation>
         {isLogged && (
-          <BurgerMenu onClick={() => setMobMenu(!mobMenu)}>
-            <GiHamburgerMenu />
-          </BurgerMenu>
+          <Avatar
+            sx={{ cursor: "pointer", marginLeft: "auto" }}
+            src="/broken-image.jpg"
+            onClick={toggleDrawer(true)}
+          />
         )}
       </HeaderBox>
       <Modal isOpen={isModalOpen} onClose={handleCloseModal}>
@@ -105,6 +115,31 @@ export const Header = () => {
           </HeaderBtn>
         </BtnBox>
       </Modal>
+      <Drawer open={open} onClose={toggleDrawer(false)} anchor="right">
+        <Box sx={style} role="presentation" onClick={toggleDrawer(false)}>
+          <p style={{ fontSize: "30px", marginBottom: "15px" }}>🥗 🍛 🍵</p>
+          <DrawerText>Привет, {name} 🖐️</DrawerText>
+          <DrawerText>✉️ {email}</DrawerText>
+          <MobNavigation>
+            {isLogged && (
+              <MobNavList>
+                <MobNavItem>
+                  <HeaderLink to="/main">Главная</HeaderLink>
+                </MobNavItem>
+                <MobNavItem>
+                  <HeaderLink to="/history">История</HeaderLink>
+                </MobNavItem>
+                <MobNavItem>
+                  {isAdmin && <HeaderLink to="/employes">Админ</HeaderLink>}
+                </MobNavItem>
+              </MobNavList>
+            )}
+          </MobNavigation>
+          <ExitBtn variant="contained" color="error" onClick={handleOpenModal}>
+            Выйти <MdOutlineLogin />
+          </ExitBtn>
+        </Box>
+      </Drawer>
     </>
   );
 };

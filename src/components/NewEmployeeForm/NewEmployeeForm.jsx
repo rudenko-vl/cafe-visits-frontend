@@ -1,12 +1,14 @@
 import { Button, TextField } from "@mui/material";
-import { useNewEmployeeMutation } from "../../redux/employesApi";
+import {
+  useNewEmployeeMutation,
+  useGetEmployesQuery,
+} from "../../redux/employesApi";
 import { Wrapper, Form, Title } from "./NewEmployeeForm.styled";
 import { Link, useLocation } from "react-router-dom";
 import { useState } from "react";
 import { notifyWarning, notifySuccess } from "../Notify/Notify";
 import { Toaster } from "react-hot-toast";
-import { Loader } from "../Loader/Loader";
-import { useGetEmployesQuery } from "../../redux/employesApi";
+import { Loader } from "../../components";
 
 export const NewEmployeeForm = () => {
   const [newPerson, isError] = useNewEmployeeMutation();

@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
-import { Header, Footer, Loader } from "../components";
+import { Header, Footer, Loader, UserItem, Tooltip } from "../components";
 import { getUsers } from "../redux/auth/auth-operations";
-import { UserItem, Tooltip } from "../components";
 import {
   List,
   Wrapper,

@@ -1,16 +1,16 @@
 import { useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import { TextField, Button } from "@mui/material";
-import { Wrapper, Img } from "./UpdateWorker.styled";
-import { useGetEmployesQuery } from "../../redux/employesApi";
-import { DelBtn, BtnWrapper } from "./UpdateWorker.styled";
+import { DelBtn, BtnWrapper, Wrapper, Img } from "./UpdateWorker.styled";
 import { RiDeleteBin6Line } from "react-icons/ri";
-import { Loader, Modal, Tooltip } from "../../components";
-import { notifySuccess } from "../Notify/Notify";
+import { Loader, Modal, Tooltip, notifySuccess } from "../../components";
 import { Toaster, toast } from "react-hot-toast";
-import { useDeleteEmployeeMutation } from "../../redux/employesApi";
+import {
+  useDeleteEmployeeMutation,
+  useUpdateEmployeeMutation,
+  useGetEmployesQuery,
+} from "../../redux/employesApi";
 import { BtnBox, HeaderBtn } from "../Header/Header.styled";
-import { useUpdateEmployeeMutation } from "../../redux/employesApi";
 
 export const UpdateWorker = () => {
   const { _id } = useParams();

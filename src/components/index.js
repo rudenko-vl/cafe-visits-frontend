@@ -13,3 +13,4 @@ export * from "./WorkerItem/WorkerItem";
 export * from "./UpdateWorker/UpdateWorker";
 export * from "./UserItem/UserItem";
 export * from "./Tooltip/Tooltip";
+export * from "./Notify/Notify";

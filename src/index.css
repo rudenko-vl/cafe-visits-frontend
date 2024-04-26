@@ -109,10 +109,6 @@ a {
   font-weight: 700;
 }
 
-.navigate.active {
-  transform: translateX(100%);
-}
-
 ::-webkit-scrollbar {
   width: 0.6rem;
   background-color: hsl(228, 4%, 15%);

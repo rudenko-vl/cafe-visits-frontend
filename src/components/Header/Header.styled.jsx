@@ -8,48 +8,53 @@ export const HeaderBox = styled.header`
   position: sticky;
   z-index: 1100;
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-start;
   align-items: center;
   min-height: 64px;
-  padding: 0 40px;
+  padding: 0 10px;
   color: #fff;
   background-color: #151545;
   box-shadow: 2px 2px 14px 0px #fff;
+  @media screen and (min-width: 480px) {
+    padding: 0 20px;
+  }
+  @media screen and (min-width: 720px) {
+    padding: 0 40px;
+  }
 `;
 export const Navigation = styled.nav`
-  margin-left: auto;
-  @media (max-width: 700px) {
-    position: fixed;
-    width: 250px;
-    height: 100%;
-    top: 0;
-    left: -260px;
-    display: flex;
-    flex-direction: column;
-    background: #454343;
-    transition: transform 0.3s linear;
+  display: none;
+  @media screen and (min-width: 720px) {
+    display: block;
+  }
+`;
+
+export const MobNavigation = styled.nav`
+  display: block;
+  @media screen and (min-width: 720px) {
+    display: none;
   }
 `;
 
 export const NavList = styled.ul`
   display: flex;
-  list-style: none;
-  @media (max-width: 700px) {
-    flex: 1;
-    flex-direction: column;
-    padding: 0px 40px;
-  }
+`;
+
+export const MobNavList = styled.ul`
+  display: flex;
+  flex-direction: column;
+  margin: 20px 0px;
 `;
 
 export const NavItem = styled.li`
   :nth-of-type(n + 2) {
     margin-left: 20px;
   }
-  @media (max-width: 700px) {
-    margin: 20px 0px;
-    :nth-of-type(n + 2) {
-      margin-left: 0;
-    }
+`;
+
+export const MobNavItem = styled.li`
+  :not(last-child) {
+    margin-bottom: 15px;
   }
 `;
 
@@ -66,6 +71,12 @@ export const HeaderBtn = styled(Button)`
   > svg {
     color: #ffffff;
     font-size: 20px;
+  }
+`;
+
+export const ExitBtn = styled(HeaderBtn)`
+  @media screen and (min-width: 720px) {
+    margin-top: 147px;
   }
 `;
 
@@ -112,17 +123,8 @@ export const LogoTxt = styled.span`
   margin: 0px 15px;
 `;
 
-export const BurgerMenu = styled.div`
-  cursor: pointer;
-  display: block;
-  @media screen and (min-width: 701px) {
-    display: none;
-  }
-  > svg {
-    color: #ffffff;
-    font-size: 28px;
-    &:hover {
-      color: #c6c6c6;
-    }
-  }
+export const DrawerText = styled.p`
+  font-size: 22px;
+  font-style: italic;
+  font-weight: 600;
 `;

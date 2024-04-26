@@ -1,10 +1,9 @@
-import { useState, useEffect } from "react";
-import { useRef } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useNewVisitMutation, useGetVisitsQuery } from "../../redux/visitsApi";
 import { useGetEmployesQuery } from "../../redux/employesApi";
 import { Toaster } from "react-hot-toast";
 import { AiOutlineClear } from "react-icons/ai";
-import { notifyWarning, notifySuccess } from "../Notify/Notify";
+import { notifyWarning, notifySuccess, Loader } from "../../components";
 import {
   Wrapper,
   Input,
@@ -15,7 +14,6 @@ import {
   ClearBtn,
 } from "./NewVisitForm.styled";
 import { debounce } from "lodash";
-import { Loader } from "../Loader/Loader";
 
 export const NewVisitForm = () => {
   const inputRef = useRef();

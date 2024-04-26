@@ -1,12 +1,15 @@
 import { useForm } from "react-hook-form";
 import { Button } from "@mui/material";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { regUser } from "../../redux/auth/auth-operations";
 import { useState } from "react";
 import { Label, Input, Form } from "../LoginForm/LoginForm.styled";
 import { MdOutlineVisibility, MdOutlineVisibilityOff } from "react-icons/md";
+import { getIsAuthorizing } from "../../redux/auth/auth-selectors";
+import { Link } from "react-router-dom";
 
 export const NewUserForm = () => {
+  const auth = useSelector(getIsAuthorizing);
   const [visiblePass, setVisiblePass] = useState(false);
   const dispatch = useDispatch();
   const {
@@ -34,6 +37,22 @@ export const NewUserForm = () => {
     width: "25px",
     height: "25px",
   };
+
+  if (auth) {
+    return (
+      <p
+        style={{
+          textAlign: "center",
+          fontSize: "24px",
+          fontWeight: "600",
+          marginTop: "50px",
+        }}
+      >
+        Аккаунт успешно создан. Теперь Вы можете войти 👉{" "}
+        <Link to={"/auth/login"}>Вход</Link>{" "}
+      </p>
+    );
+  }
 
   return (
     <Form onSubmit={handleSubmit(myHandleSubmit)}>
